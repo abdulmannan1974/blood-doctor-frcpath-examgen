@@ -1,0 +1,2490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood🩸Doctor | FRCPath Haematology Exam Question Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #11131a;
+      --slate: #2b2f3a;
+      --muted: #5c6170;
+      --blood: #8b0e1c;
+      --blood-soft: #b73345;
+      --gold: #d7a35d;
+      --teal: #0f766e;
+      --teal-soft: #cde8e4;
+      --rose: #f4d8dd;
+      --ivory: #f7f2ed;
+      --mist: #f3f6f8;
+      --white: #ffffff;
+      --shadow: 0 28px 60px rgba(17, 19, 26, 0.18);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Sora', system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top, #ffffff 0%, #f6efe8 38%, #efe3d7 100%);
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 6vw;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(17,19,26,0.08);
+    }
+
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: transparent;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover { background: var(--ivory); }
+    .nav-link.active { background: var(--blood); color: white; }
+
+    /* Hero */
+    .hero {
+      padding: 60px 6vw 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(183, 51, 69, 0.3) 0%, transparent 70%);
+      right: -200px;
+      top: -200px;
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--rose);
+      color: var(--blood);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    /* Main Layout */
+    .main {
+      padding: 0 6vw 80px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 1024px) {
+      .main { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .sidebar.mobile-open { display: block; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: white; z-index: 200; padding: 20px; overflow-y: auto; }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+
+    .sidebar-section {
+      margin-bottom: 24px;
+    }
+
+    .sidebar-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .sidebar-item {
+      display: block;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+      text-align: left;
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .sidebar-item:hover { background: var(--ivory); }
+    .sidebar-item.active { background: var(--blood); color: white; }
+
+    /* Content Panels */
+    .content-panel {
+      display: none;
+    }
+
+    .content-panel.active {
+      display: block;
+    }
+
+    .panel-header {
+      margin-bottom: 32px;
+    }
+
+    .panel-header h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .panel-header p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Cards */
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-weight: 600;
+      font-family: 'Sora', sans-serif;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .form-select, .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid rgba(17,19,26,0.15);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: white;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-select:focus, .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--blood);
+      box-shadow: 0 0 0 3px rgba(139,14,28,0.1);
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--blood);
+      color: white;
+      box-shadow: 0 12px 32px rgba(139,14,28,0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(139,14,28,0.3);
+    }
+
+    .btn-secondary {
+      background: var(--ivory);
+      color: var(--ink);
+    }
+
+    .btn-secondary:hover {
+      background: var(--rose);
+    }
+
+    .btn-teal {
+      background: var(--teal);
+      color: white;
+    }
+
+    .btn-teal:hover {
+      background: #0d6960;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Domain Cards */
+    .domain-card {
+      background: var(--mist);
+      border-radius: 16px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .domain-card:hover {
+      background: var(--ivory);
+    }
+
+    .domain-card.selected {
+      border-color: var(--blood);
+      background: var(--rose);
+    }
+
+    .domain-card h4 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .domain-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Template Display */
+    .template-box {
+      background: var(--mist);
+      border-radius: 16px;
+      padding: 20px;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    /* Output Area */
+    .output-area {
+      background: white;
+      border: 1px solid rgba(17,19,26,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      min-height: 300px;
+    }
+
+    .output-area.empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Callout */
+    .callout {
+      background: var(--teal-soft);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .callout.warning {
+      background: #fff3e6;
+      border: 1px solid rgba(215,163,93,0.4);
+    }
+
+    .callout strong {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+      background: var(--mist);
+      padding: 6px;
+      border-radius: 14px;
+      width: fit-content;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .tab:hover { background: rgba(255,255,255,0.5); }
+    .tab.active { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(17,19,26,0.08);
+    }
+
+    th {
+      background: var(--mist);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    tr:hover td {
+      background: rgba(247,242,237,0.5);
+    }
+
+    /* Accordion */
+    details {
+      background: white;
+      border-radius: 14px;
+      border: 1px solid rgba(17,19,26,0.1);
+      margin-bottom: 12px;
+    }
+
+    details summary {
+      padding: 16px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--muted);
+    }
+
+    details[open] summary::after {
+      content: '-';
+    }
+
+    details > div {
+      padding: 0 20px 20px;
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(17,19,26,0.06);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .checklist li::before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--teal);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Copy Button */
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      background: white;
+      border: 1px solid rgba(17,19,26,0.15);
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+    }
+
+    .copy-btn:hover {
+      background: var(--ivory);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 32px 6vw;
+      background: var(--ink);
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Utility */
+    .text-muted { color: var(--muted); }
+    .text-blood { color: var(--blood); }
+    .text-teal { color: var(--teal); }
+    .mb-4 { margin-bottom: 16px; }
+    .mb-6 { margin-bottom: 24px; }
+    .mt-4 { margin-top: 16px; }
+    .relative { position: relative; }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-btn {
+      display: none;
+      padding: 10px;
+      background: var(--ivory);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+      .mobile-menu-btn { display: block; }
+    }
+
+    /* Stat cards */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 900px) {
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(17,19,26,0.08);
+    }
+
+    .stat-card .number {
+      font-family: 'Fraunces', serif;
+      font-size: 2.2rem;
+      color: var(--blood);
+      margin-bottom: 4px;
+    }
+
+    .stat-card .label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Progress indicator */
+    .progress-bar {
+      height: 6px;
+      background: var(--mist);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--teal);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="brand">Blood🩸Doctor</div>
+    <div class="nav-links">
+      <button class="nav-link active" data-section="overview">Overview</button>
+      <button class="nav-link" data-section="part1">Part 1</button>
+      <button class="nav-link" data-section="part2">Part 2</button>
+      <button class="nav-link" data-section="viva">Viva</button>
+      <button class="nav-link" data-section="generator">Generator</button>
+      <button class="nav-link" data-section="guidelines">Guidelines</button>
+    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">Menu</button>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="pill">FRCPath Haematology Exam Preparation</div>
+    <h1>Exam Question Generator Framework</h1>
+    <p>A comprehensive, structured system for producing high-quality FRCPath haematology exam questions and teaching materials aligned to current BSH, ISTH, NICE, and UK best practice standards.</p>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <button class="btn btn-primary" onclick="showSection('generator')">Start Generating</button>
+      <button class="btn btn-secondary" onclick="showSection('part1')">Explore Framework</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Part 1 Exam</div>
+        <button class="sidebar-item" data-panel="emq">Extended Matching Questions</button>
+        <button class="sidebar-item" data-panel="mcq">Multiple Choice Questions</button>
+        <button class="sidebar-item" data-panel="essay">Essay Questions</button>
+        <button class="sidebar-item" data-panel="critical">Critical Investigation</button>
+        <button class="sidebar-item" data-panel="monitoring">Disease Monitoring</button>
+        <button class="sidebar-item" data-panel="staging">Disease Staging</button>
+        <button class="sidebar-item" data-panel="treatment">Treatment Lines</button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Part 2 Exam</div>
+        <button class="sidebar-item" data-panel="morphology">Morphology Day</button>
+        <button class="sidebar-item" data-panel="hplc">HPLC Interpretation</button>
+        <button class="sidebar-item" data-panel="haemostasis">Haemostasis Cases</button>
+        <button class="sidebar-item" data-panel="transfusion">Transfusion Medicine</button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Viva Stations</div>
+        <button class="sidebar-item" data-panel="viva-general">General Haematology</button>
+        <button class="sidebar-item" data-panel="viva-haemostasis">Haemostasis/Thrombosis</button>
+        <button class="sidebar-item" data-panel="viva-transfusion">Transfusion Medicine</button>
+        <button class="sidebar-item" data-panel="viva-malignant">Malignant Haematology</button>
+      </div>
+    </aside>
+
+    <!-- Content Area -->
+    <div class="content">
+      <!-- Overview Panel -->
+      <div class="content-panel active" id="panel-overview">
+        <div class="panel-header">
+          <h2>Framework Overview</h2>
+          <p>Your complete guide to FRCPath haematology examination preparation with structured question generation and learning pathways.</p>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="number">12</div>
+            <div class="label">EMQ Domains</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">8</div>
+            <div class="label">Haemostasis Cases</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">8</div>
+            <div class="label">Transfusion Cases</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">4</div>
+            <div class="label">Viva Stations</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Guiding Principles <span class="card-tag">Foundation</span></h3>
+          <div class="grid-2">
+            <div>
+              <ul class="checklist">
+                <li>Evidence-based: All content rooted in BSH, ISTH, NICE, ASH, EHA guidelines</li>
+                <li>Clinical relevance: Every question reflects real-world haematology practice</li>
+                <li>Structured progression: Questions scale from foundational to consultant-level</li>
+              </ul>
+            </div>
+            <div>
+              <ul class="checklist">
+                <li>Transparent reasoning: Answers explain why correct options work</li>
+                <li>Trainee-focused: Materials support active learning</li>
+                <li>Guideline mapped: Direct links to supporting documents</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Governance Sources <span class="card-tag">References</span></h3>
+          <div class="grid-3">
+            <div class="domain-card">
+              <h4>BSH</h4>
+              <p>British Society for Haematology Transfusion, Haemostasis, and Laboratory Standards</p>
+            </div>
+            <div class="domain-card">
+              <h4>ISTH</h4>
+              <p>International Society on Thrombosis and Haemostasis Classifications</p>
+            </div>
+            <div class="domain-card">
+              <h4>NICE</h4>
+              <p>National Institute for Health and Care Excellence Guidance</p>
+            </div>
+            <div class="domain-card">
+              <h4>NHSBT</h4>
+              <p>NHS Blood and Transplant Standards</p>
+            </div>
+            <div class="domain-card">
+              <h4>UKHCDO</h4>
+              <p>UK Haemophilia Centre Directors' Organisation Guidelines</p>
+            </div>
+            <div class="domain-card">
+              <h4>RCOG</h4>
+              <p>Royal College of Obstetricians for obstetric haematology</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Trainee Development Pathway <span class="card-tag">Learning</span></h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Timeline</th>
+                  <th>Focus Areas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Foundation</strong></td>
+                  <td>12+ months pre-exam</td>
+                  <td>Complete all Part 1 materials, build knowledge base</td>
+                </tr>
+                <tr>
+                  <td><strong>Critical Review</strong></td>
+                  <td>6-12 months pre-exam</td>
+                  <td>Critical investigations module, begin Part 2 morphology</td>
+                </tr>
+                <tr>
+                  <td><strong>Practical</strong></td>
+                  <td>3-6 months pre-exam</td>
+                  <td>Haemostasis/transfusion detailed case work</td>
+                </tr>
+                <tr>
+                  <td><strong>Exam Ready</strong></td>
+                  <td>1-3 months pre-exam</td>
+                  <td>Mock vivas, timed practice, consolidation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMQ Panel -->
+      <div class="content-panel" id="panel-emq">
+        <div class="panel-header">
+          <h2>Extended Matching Questions (EMQs)</h2>
+          <p>Theme-based clinical scenarios with multiple linked questions testing diagnostic reasoning and clinical decision-making.</p>
+        </div>
+
+        <div class="card">
+          <h3>EMQ Structure <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('emq-template')">Copy Template</button>
+            <div class="template-box" id="emq-template">THEME: [Condition/Syndrome/Investigation Name]
+
+CLINICAL SCENARIO:
+[2-3 sentence summary of patient presentation, key investigations, and clinical context]
+
+LEAD-IN QUESTION:
+[Specific clinical question about diagnosis, investigation, management, or mechanism]
+
+OPTIONS:
+A. [Option A]
+B. [Option B]
+C. [Option C]
+... (up to L)
+
+QUESTIONS:
+1. [Specific clinical question linked to scenario]
+2. [Follow-on investigation or management question]
+3. [Treatment or monitoring question]
+4. [Complication or drug interaction question]
+5. [Follow-up or prognosis question]
+
+=== ANSWER STRUCTURE ===
+
+CORRECT ANSWER & RATIONALE (100-150 words):
+- Why this answer is correct
+- Relevant guideline reference
+- Mechanism or pathway explanation
+- Clinical application in the scenario
+
+WHY OTHER OPTIONS ARE WRONG (50-80 words per distractor):
+- Common misconception the option represents
+- Why it doesn't fit this clinical context
+- When that option might be appropriate
+
+CLINICAL PEARL:
+- One practical point relevant to real practice
+- Link to next-stage management or monitoring</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>EMQ Domains - Part 1 Coverage <span class="card-tag">12 Domains</span></h3>
+          <div class="grid-2">
+            <details>
+              <summary>Domain 1: Anaemia and Iron Metabolism</summary>
+              <div>
+                <ul>
+                  <li>Iron deficiency: diagnosis, ferritin interpretation, transferrin saturation, Ret-He</li>
+                  <li>B12 and folate deficiency: causes, MMA, homocysteine interpretation</li>
+                  <li>Anaemia of chronic disease vs iron deficiency</li>
+                  <li>Haemolytic anaemia: DAT, reticulocyte count, LDH, bilirubin patterns</li>
+                  <li>Sideroblastic anaemia: iron staining, RARS-T classification</li>
+                  <li>Macrocytic anaemia differential</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 2: Haemoglobinopathies and Variants</summary>
+              <div>
+                <ul>
+                  <li>Thalassaemia: alpha, beta, HPLC interpretation, MCV patterns</li>
+                  <li>Sickle cell disease: HbS percentages, HbF significance</li>
+                  <li>Haemoglobin variants: HbC, HbE, HbD, HbO-Arab</li>
+                  <li>HbA2 elevation in beta thalassaemia trait</li>
+                  <li>Haemoglobin H disease</li>
+                  <li>Unstable haemoglobins</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 3: Blood Film Morphology</summary>
+              <div>
+                <ul>
+                  <li>RBC morphology: spherocytes, schistocytes, polychromasia, hypersegmented neutrophils</li>
+                  <li>WBC abnormalities: blasts, left shift, toxic changes, Auer rods, Dohle bodies</li>
+                  <li>Platelet morphology: giant platelets, microthrombi</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 4: Bone Marrow Assessment</summary>
+              <div>
+                <ul>
+                  <li>Aspirate vs trephine: when to perform each</li>
+                  <li>Cellularity assessment and grading</li>
+                  <li>Dysplasia: morphological criteria for MDS classification</li>
+                  <li>Cytochemical stains: MPO, Sudan Black, PAS</li>
+                  <li>Immunocytochemistry applications</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 5: Leucocytosis and Differential</summary>
+              <div>
+                <ul>
+                  <li>Neutrophil left shift: pathological vs physiological causes</li>
+                  <li>Reactive lymphocytosis: EBV, CMV, toxoplasma patterns</li>
+                  <li>Monocytosis: causes and significance</li>
+                  <li>Eosinophilia: hypereosinophilic syndrome vs clonal causes</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 6: Leucopenia and Immune Cytopenias</summary>
+              <div>
+                <ul>
+                  <li>Neutropenia: causes and management</li>
+                  <li>Immune thrombocytopenia (ITP): diagnosis, differential from TTP</li>
+                  <li>Evans syndrome: definition, testing strategy</li>
+                  <li>Drug-induced cytopenias: mechanisms and management</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 7: Coagulation and Haemostasis</summary>
+              <div>
+                <ul>
+                  <li>PT, APTT, fibrinogen interpretation: mixing studies</li>
+                  <li>Thrombin time: heparin vs hypofibrinogenaemia</li>
+                  <li>Platelet function disorders: screening vs diagnostic tests</li>
+                  <li>Von Willebrand disease: type 1, 2, 3 classification</li>
+                  <li>Lupus anticoagulant: dRVVT, silica clotting time ratio</li>
+                  <li>Factor assays: one-stage, chromogenic, interpretation</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 8: Thrombophilia Screening</summary>
+              <div>
+                <ul>
+                  <li>Activated protein C resistance: Factor V Leiden</li>
+                  <li>Prothrombin G20210A variant: when to test</li>
+                  <li>Natural anticoagulants: protein C, protein S, antithrombin</li>
+                  <li>Lipoprotein(a): significance in VTE</li>
+                  <li>Homocysteine: causes of elevation</li>
+                  <li>Testing algorithms: cascades vs single tests</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 9: Transfusion Blood Bank</summary>
+              <div>
+                <ul>
+                  <li>ABO and Rh typing: discrepancies and resolution</li>
+                  <li>Antibody screening: IAT principles</li>
+                  <li>Compatibility testing: immediate spin, IAT phase, 37C</li>
+                  <li>Antibody identification: panel cell methodology</li>
+                  <li>Transfusion reactions: SHOT categories, investigations</li>
+                  <li>Anti-D prophylaxis: dosing calculations</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 10: Red Cell Disorders</summary>
+              <div>
+                <ul>
+                  <li>Hereditary spherocytosis: osmotic fragility, EMA binding</li>
+                  <li>G6PD: favism triggers, testing timing</li>
+                  <li>Pyruvate kinase deficiency: diagnosis</li>
+                  <li>PNH: flow cytometry, GPI-anchored proteins</li>
+                  <li>Hereditary xerocytosis: ektacytometry</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 11: Platelet Disorders</summary>
+              <div>
+                <ul>
+                  <li>Immune vs non-immune thrombocytopenia</li>
+                  <li>Thrombotic microangiopathies: TTP vs HUS vs HELLP</li>
+                  <li>HIT: 4T scoring, serotonin release assay</li>
+                  <li>Bernard-Soulier syndrome: giant platelets</li>
+                  <li>Glanzmann thrombasthenia: aggregation patterns</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Domain 12: Haemostasis in Systemic Disease</summary>
+              <div>
+                <ul>
+                  <li>DIC: scoring systems, management</li>
+                  <li>Liver disease: synthetic factor defects</li>
+                  <li>Renal disease: uraemia and bleeding risk</li>
+                  <li>Antiphospholipid syndrome: manifestations</li>
+                  <li>Sepsis: DIC coagulation pattern</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- MCQ Panel -->
+      <div class="content-panel" id="panel-mcq">
+        <div class="panel-header">
+          <h2>Multiple Choice Questions (MCQs)</h2>
+          <p>Single best answer format testing knowledge application in clinical scenarios.</p>
+        </div>
+
+        <div class="card">
+          <h3>MCQ Structure <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('mcq-template')">Copy Template</button>
+            <div class="template-box" id="mcq-template">QUESTION NUMBER: [QID]
+DIFFICULTY: Foundation / Intermediate / Advanced
+CLINICAL DOMAIN: [Domain]
+
+STEM:
+[Clinical scenario with key findings]
+[Specific clinical question]
+
+A. [Plausible but incorrect - common misconception]
+B. [Partially correct but incomplete option]
+C. [CORRECT ANSWER - Most appropriate option]
+D. [Incorrect - appeals to partially informed]
+E. [Incorrect - outdated or alternative practice]
+
+=== ANSWER FRAMEWORK ===
+
+CORRECT ANSWER - FULL EXPLANATION (120-150 words):
+- Why C is the best answer in this context
+- Guideline support
+- Clinical reasoning pathway
+- Real-world relevance
+
+DISTRACTOR ANALYSIS (40-60 words each):
+A: Common misconception being tested
+B: Partially correct but not best
+D: Trap for partially informed candidates
+E: Outdated or inappropriate practice
+
+RELATED LEARNING POINTS:
+- Additional knowledge candidates should have
+- Links to related conditions or investigations
+- Guideline references</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>MCQ Domain Focus <span class="card-tag">Coverage</span></h3>
+          <p class="mb-4">MCQs should cover the same 12 domains as EMQs, focusing on:</p>
+          <div class="grid-3">
+            <div class="domain-card">
+              <h4>Diagnosis</h4>
+              <p>Differential diagnosis and pattern recognition</p>
+            </div>
+            <div class="domain-card">
+              <h4>Investigation</h4>
+              <p>Single abnormal result interpretation</p>
+            </div>
+            <div class="domain-card">
+              <h4>Management</h4>
+              <p>Immediate management decisions</p>
+            </div>
+            <div class="domain-card">
+              <h4>Safety</h4>
+              <p>Contraindications and safety issues</p>
+            </div>
+            <div class="domain-card">
+              <h4>Pharmacology</h4>
+              <p>Drug interactions and adverse effects</p>
+            </div>
+            <div class="domain-card">
+              <h4>Monitoring</h4>
+              <p>Risk assessment and intervals</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Difficulty Progression</strong>
+          <p><strong>Foundation:</strong> Single concept testing, clear answers<br>
+          <strong>Intermediate:</strong> Scenario-based, moderate complexity<br>
+          <strong>Advanced:</strong> Synthesis of multiple areas, real-world complexity</p>
+        </div>
+      </div>
+
+      <!-- Essay Panel -->
+      <div class="content-panel" id="panel-essay">
+        <div class="panel-header">
+          <h2>Essay Questions</h2>
+          <p>Structured long-form responses demonstrating comprehensive knowledge and clinical reasoning.</p>
+        </div>
+
+        <div class="card">
+          <h3>Essay Question Types <span class="card-tag">4 Types</span></h3>
+          <div class="grid-2">
+            <div class="domain-card">
+              <h4>Type 1: Diagnostic Approach (20 marks)</h4>
+              <p>"A 45-year-old man presents with [symptoms]. Outline your diagnostic approach, investigations, and interpretation."</p>
+            </div>
+            <div class="domain-card">
+              <h4>Type 2: Management Plan (20 marks)</h4>
+              <p>"A patient has been diagnosed with [condition]. Describe treatment options, first-line approach, and monitoring."</p>
+            </div>
+            <div class="domain-card">
+              <h4>Type 3: Case Integration (20 marks)</h4>
+              <p>"A 32-year-old woman with [condition] develops [complication]. Discuss management and evidence."</p>
+            </div>
+            <div class="domain-card">
+              <h4>Type 4: Critical Analysis (20 marks)</h4>
+              <p>"Critically evaluate the role of [investigation/treatment] in [condition]. Consider evidence and alternatives."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Essay Answer Framework <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('essay-template')">Copy Template</button>
+            <div class="template-box" id="essay-template">ESSAY TITLE: [Condition/Problem]
+QUESTION TYPE: [Diagnostic/Management/Integration/Critical]
+EXAM LEVEL: Part 1 / Part 2
+GUIDELINE ALIGNMENT: [Relevant BSH/ISTH guidelines]
+
+QUESTION:
+[Full essay question as it appears in exam]
+
+=== MODEL ANSWER STRUCTURE ===
+
+INTRODUCTION (2 marks) - 80-120 words:
+[Clear statement of the problem/condition]
+[Overview of approach: diagnostic/management/critical framework]
+[Key guiding principles]
+
+MAIN BODY - SECTION 1 (5-6 marks) - 200-250 words:
+[First major topic area]
+- Specific findings and their significance
+- Guideline support with references
+- Practical application in this case
+
+MAIN BODY - SECTION 2 (5-6 marks) - 200-250 words:
+[Second major topic area]
+- Alternative approaches or differential considerations
+- Why one approach preferred over another
+- Evidence base and guideline alignment
+
+MAIN BODY - SECTION 3 (4-5 marks) - 150-200 words:
+[Third topic area]
+- Long-term management or monitoring strategy
+- When to escalate or change approach
+- Patient factors affecting management
+
+CONCLUSION (2-3 marks) - 100-120 words:
+[Synthesis of approach with guideline support]
+- Key clinical decision points
+- Summary of evidence base
+
+TOTAL WORD COUNT: 800-950 words</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Essay Topics - Part 1 <span class="card-tag">Suggested</span></h3>
+          <div class="grid-2">
+            <div>
+              <h4 class="mb-4">Anaemia & Iron Metabolism</h4>
+              <ul>
+                <li>Approach to microcytic anaemia</li>
+                <li>Management of vitamin B12 deficiency</li>
+                <li>Diagnosis and monitoring of iron deficiency</li>
+                <li>Anaemia of chronic disease vs iron deficiency</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="mb-4">Bleeding Disorders</h4>
+              <ul>
+                <li>Approach to a patient with bleeding tendency</li>
+                <li>Von Willebrand disease: diagnosis and management</li>
+                <li>Haemophilia A: initial diagnosis and management</li>
+                <li>Rare bleeding disorders: factor deficiencies</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="mb-4">Thrombotic Disorders</h4>
+              <ul>
+                <li>First unprovoked VTE: thrombophilia workup</li>
+                <li>Antiphospholipid syndrome: diagnosis and anticoagulation</li>
+                <li>Heparin-induced thrombocytopenia</li>
+                <li>Thrombotic microangiopathy: TTP vs HUS</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="mb-4">Transfusion Medicine</h4>
+              <ul>
+                <li>ABO incompatibility: investigation and management</li>
+                <li>Acute transfusion reaction: immediate steps</li>
+                <li>Transfusion in pregnancy: anti-D, alloimmunisation</li>
+                <li>Massive transfusion protocol</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Critical Investigation Panel -->
+      <div class="content-panel" id="panel-critical">
+        <div class="panel-header">
+          <h2>Critical Investigation Review</h2>
+          <p>Comprehensive analysis of laboratory tests including interpretation, limitations, and clinical applications.</p>
+        </div>
+
+        <div class="card">
+          <h3>Test Analysis Template <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('critical-template')">Copy Template</button>
+            <div class="template-box" id="critical-template">INVESTIGATION: [Test Name]
+PRINCIPLE: [What the test measures]
+METHODOLOGY: [How it works - simple explanation]
+NORMAL RANGE: [Reference interval]
+CLINICAL APPLICATIONS: [When to use]
+
+=== WHEN THIS TEST TELLS YOU SOMETHING IMPORTANT ===
+
+HIGH RESULT:
+- Differential diagnosis 1: presentation, other findings
+- Differential diagnosis 2: presentation, other findings
+- Potential artefact or lab error: how to detect
+
+LOW RESULT:
+- Differential diagnosis 1: presentation, other findings
+- Differential diagnosis 2: presentation, other findings
+- What else to check simultaneously
+
+BORDERLINE/EQUIVOCAL:
+- When to repeat
+- When to do additional testing
+- When to treat based on clinical context
+
+=== LIMITATIONS AND PITFALLS ===
+
+Test Limitations:
+- What this test cannot tell you
+- Conditions that give false positives
+- Conditions that give false negatives
+
+When This Test Can Mislead:
+- Common misinterpretations
+- Why ordering might waste time
+- Cost-effectiveness considerations
+
+=== INTERPRETIVE HIERARCHY ===
+
+WHAT MUST COME FIRST: [Foundational investigation]
+WHAT COMES NEXT: [Confirmatory/reflex testing]
+WHAT TO AVOID: [Over-investigation]
+WHEN TO ESCALATE: [Specialist referral thresholds]
+
+=== CASE APPLICATION ===
+
+Case: [Example patient]
+Initial test result: [Value]
+Interpretation: [What we learn]
+Next appropriate step: [Reflex testing]
+Outcome: [Real practice result]</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Critical Review Investigations <span class="card-tag">Coverage</span></h3>
+          <div class="grid-2">
+            <details>
+              <summary>Iron Metabolism & Anaemia</summary>
+              <div>
+                <ul>
+                  <li>Iron studies: ferritin, iron, TIBC, transferrin saturation</li>
+                  <li>Reticulocyte haemoglobin (Ret-He)</li>
+                  <li>Ferritin as acute-phase reactant</li>
+                  <li>Soluble transferrin receptor</li>
+                  <li>Vitamin B12 assays: total B12, holotranscobalamin</li>
+                  <li>Methylmalonic acid, homocysteine</li>
+                  <li>Folate: serum vs RBC</li>
+                  <li>Haemolysis workup: reticulocytes, LDH, bilirubin, haptoglobin</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Haemoglobinopathy Diagnosis</summary>
+              <div>
+                <ul>
+                  <li>HPLC/Capillary electrophoresis: peak interpretation</li>
+                  <li>HbA2 elevation: beta thalassaemia trait</li>
+                  <li>HbF: when significant</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Coagulation Screening Tests</summary>
+              <div>
+                <ul>
+                  <li>PT/INR: extrinsic pathway, anticoagulation, liver disease</li>
+                  <li>APTT: intrinsic pathway, inhibitor vs deficiency</li>
+                  <li>Fibrinogen: functional vs antigenic assays</li>
+                  <li>Thrombin time: heparin, hypofibrinogenaemia, dabigatran</li>
+                  <li>Lupus anticoagulant: dRVVT, clinical significance</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Platelet Function & VWD</summary>
+              <div>
+                <ul>
+                  <li>VWF antigen, activity, factor VIII relationship</li>
+                  <li>VWD type 1, 2, 3 classification</li>
+                  <li>Repeat testing considerations</li>
+                  <li>Platelet aggregation studies</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Thrombophilia Assessment</summary>
+              <div>
+                <ul>
+                  <li>Protein C and S: functional vs antigenic; warfarin effects</li>
+                  <li>Antithrombin: heparin effects; low in DIC</li>
+                  <li>Factor V Leiden & Prothrombin G20210A</li>
+                  <li>Lipoprotein(a): clinical significance</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Blood Bank and Transfusion</summary>
+              <div>
+                <ul>
+                  <li>DAT (Coombs): polyspecific vs monospecific</li>
+                  <li>IAT: antibody screening and panel interpretation</li>
+                  <li>ABO/RhD typing: discrepancy resolution</li>
+                  <li>Bombay phenotype and weak D</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monitoring Panel -->
+      <div class="content-panel" id="panel-monitoring">
+        <div class="panel-header">
+          <h2>Disease Monitoring Frameworks</h2>
+          <p>Structured approaches to long-term monitoring and response assessment.</p>
+        </div>
+
+        <div class="card">
+          <h3>Monitoring Plan Template <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('monitoring-template')">Copy Template</button>
+            <div class="template-box" id="monitoring-template">CONDITION: [Name]
+NATURAL HISTORY: [Brief disease course]
+TREATMENT PHASE: [e.g., on anticoagulation, off treatment]
+
+=== MONITORING TIMELINE ===
+
+FREQUENCY: [Daily/weekly/monthly/quarterly/annually]
+
+INVESTIGATIONS TO PERFORM:
+- Test 1: Why, normal range, action if abnormal
+- Test 2: Why, normal range, action if abnormal
+- Test 3: Why, normal range, action if abnormal
+
+CLINICAL ASSESSMENT:
+- Symptom check: what to ask patient
+- Physical examination: what to look for
+- Lifestyle factors: activity level, bleeding/clotting symptoms
+
+=== ACTION THRESHOLDS ===
+
+Threshold 1: [Investigation value] -> Action: [What to do]
+Threshold 2: [Investigation value] -> Action: [What to do]
+Threshold 3: [Clinical sign] -> Action: [What to do]
+
+=== RESPONSE TO ABNORMALITY ===
+
+If [abnormal result]:
+1. Confirm finding (repeat, timing considerations)
+2. Differential diagnosis in this patient
+3. Specific management adjustment
+4. When to escalate or refer
+
+=== GUIDELINE REFERENCE ===
+
+[Current BSH/ISTH guideline and section]
+[Key recommendation quote]</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Essential Monitoring Frameworks <span class="card-tag">Conditions</span></h3>
+          <div class="grid-3">
+            <div class="domain-card">
+              <h4>Haemophilia A/B</h4>
+              <p>Factor levels, inhibitor monitoring, joint health</p>
+            </div>
+            <div class="domain-card">
+              <h4>Von Willebrand Disease</h4>
+              <p>VWF levels, bleeding symptoms, procedure planning</p>
+            </div>
+            <div class="domain-card">
+              <h4>ITP</h4>
+              <p>Platelet counts, bleeding risk, treatment response</p>
+            </div>
+            <div class="domain-card">
+              <h4>Antiphospholipid Syndrome</h4>
+              <p>Anticoagulation, antibody levels, thrombosis risk</p>
+            </div>
+            <div class="domain-card">
+              <h4>Sickle Cell Disease</h4>
+              <p>HbF, transfusion, organ function</p>
+            </div>
+            <div class="domain-card">
+              <h4>Thalassaemia Major</h4>
+              <p>Transfusion requirements, iron overload, chelation</p>
+            </div>
+            <div class="domain-card">
+              <h4>PNH</h4>
+              <p>Clone size, haemolysis markers, thrombosis</p>
+            </div>
+            <div class="domain-card">
+              <h4>MDS Surveillance</h4>
+              <p>Cytopenias, transfusion needs, transformation</p>
+            </div>
+            <div class="domain-card">
+              <h4>Post-Transplant</h4>
+              <p>Engraftment, GVHD, chimerism, relapse</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Staging Panel -->
+      <div class="content-panel" id="panel-staging">
+        <div class="panel-header">
+          <h2>Disease Staging Frameworks</h2>
+          <p>Standardised staging systems with prognostic implications and treatment guidance.</p>
+        </div>
+
+        <div class="card">
+          <h3>Staging System Template <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('staging-template')">Copy Template</button>
+            <div class="template-box" id="staging-template">DISEASE: [Name]
+STAGING SYSTEM: [Official system name and year]
+PURPOSE: [Prognostic significance]
+
+=== STAGE DEFINITIONS ===
+
+STAGE I:
+- Features: [Specific criteria]
+- Frequency: [% of patients at diagnosis]
+- Prognosis: [Median survival/outcome]
+- Management implications: [How staging affects treatment]
+
+STAGE II:
+- Features: [Specific criteria]
+- Frequency: [% of patients at diagnosis]
+- Prognosis: [Median survival/outcome]
+- Management implications: [How staging affects treatment]
+
+[Continue for all stages]
+
+=== PROGNOSTIC SCORING SYSTEMS ===
+
+For [Specific stage/condition]:
+- Score component 1: [How weighted]
+- Score component 2: [How weighted]
+- Score component 3: [How weighted]
+
+Risk groups: [Low/Intermediate/High definitions]
+Outcomes by risk group: [Specific survival data]
+
+=== HOW TO DETERMINE STAGE ===
+
+Step 1: [Initial investigations]
+Step 2: [Confirmatory tests]
+Step 3: [Risk stratification]
+Step 4: [Special circumstances]
+
+=== GUIDELINE REFERENCE ===
+
+[System designer/organisation]
+[Latest version and year]</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Essential Staging Frameworks <span class="card-tag">Systems</span></h3>
+          <div class="grid-2">
+            <div class="domain-card">
+              <h4>Lymphoma Staging (Ann Arbor)</h4>
+              <p>Nodal involvement, extranodal disease, B symptoms</p>
+            </div>
+            <div class="domain-card">
+              <h4>AML Risk (ELN 2022)</h4>
+              <p>Cytogenetics, molecular markers, response criteria</p>
+            </div>
+            <div class="domain-card">
+              <h4>MDS Staging (IPSS-R)</h4>
+              <p>Cytopenias, blasts, cytogenetics</p>
+            </div>
+            <div class="domain-card">
+              <h4>CLL Staging (Rai/Binet)</h4>
+              <p>Lymphocytosis, organomegaly, cytopenias</p>
+            </div>
+            <div class="domain-card">
+              <h4>Myeloma (Revised ISS)</h4>
+              <p>Albumin, B2M, LDH, cytogenetics</p>
+            </div>
+            <div class="domain-card">
+              <h4>Follicular Lymphoma (FLIPI)</h4>
+              <p>Age, stage, Hb, LDH, nodal areas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Treatment Panel -->
+      <div class="content-panel" id="panel-treatment">
+        <div class="panel-header">
+          <h2>Lines of Treatment Frameworks</h2>
+          <p>Multi-line treatment algorithms with evidence base and special considerations.</p>
+        </div>
+
+        <div class="card">
+          <h3>Treatment Algorithm Template <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('treatment-template')">Copy Template</button>
+            <div class="template-box" id="treatment-template">DISEASE: [Name]
+EVIDENCE BASE: [Key trials/guidelines]
+
+=== FIRST-LINE TREATMENT ===
+
+Standard approach: [Treatment name]
+Components: [Drug 1, Drug 2, Schedule]
+Dosing: [Specific regimen]
+Cycles/Duration: [Total treatment length]
+Response assessment: [When/how to measure]
+Expected response rate: [CR%, PR%, ORR%]
+
+When NOT appropriate:
+- Age >X years -> Alternative: [Option]
+- Renal dysfunction -> Modification: [Change]
+- Cardiac disease -> Contraindication: [Option]
+
+Response definition:
+- Complete remission: [Criteria]
+- Partial remission: [Criteria]
+- Progressive disease: [Criteria]
+
+=== SECOND-LINE TREATMENT ===
+
+For patients with:
+- Primary refractoriness -> [Treatment]
+- Relapsed after [timeframe] -> [Treatment]
+- Relapsed refractory -> [Treatment]
+
+Each option includes:
+- When preferred over alternatives
+- Comparative efficacy
+- Patient selection criteria
+
+=== SUPPORTIVE CARE ===
+
+- Infection prophylaxis: [Agents], when to start
+- Symptom management: [Key toxicities]
+- Fertility preservation: [Options]
+
+=== GUIDELINE ALIGNMENT ===
+
+BSH/NICE/EHA guideline: [Reference]
+Key recommendation: [Quote]</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Treatment Line Frameworks <span class="card-tag">Malignancies</span></h3>
+          <div class="grid-3">
+            <div class="domain-card">
+              <h4>DLBCL</h4>
+              <p>R-CHOP, salvage, CAR-T options</p>
+            </div>
+            <div class="domain-card">
+              <h4>Follicular Lymphoma</h4>
+              <p>Watch & wait, immunochemotherapy</p>
+            </div>
+            <div class="domain-card">
+              <h4>CLL</h4>
+              <p>BTKi, venetoclax, chemoimmunotherapy</p>
+            </div>
+            <div class="domain-card">
+              <h4>Multiple Myeloma</h4>
+              <p>Induction, ASCT, maintenance</p>
+            </div>
+            <div class="domain-card">
+              <h4>Hodgkin Lymphoma</h4>
+              <p>ABVD, escalated BEACOPP</p>
+            </div>
+            <div class="domain-card">
+              <h4>AML</h4>
+              <p>Intensive, hypomethylating agents</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Morphology Panel -->
+      <div class="content-panel" id="panel-morphology">
+        <div class="panel-header">
+          <h2>Morphology Day - Part 2</h2>
+          <p>Total 180 minutes: 10 short cases (90 min) + 3 long cases (90 min)</p>
+        </div>
+
+        <div class="card">
+          <h3>Short Case Template (9 minutes) <span class="card-tag">10 Cases</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('shortcase-template')">Copy Template</button>
+            <div class="template-box" id="shortcase-template">CASE NUMBER: [1-10]
+MATERIAL: [Blood film / BM aspirate / Trephine / HPLC]
+TIME: 9 minutes
+
+DIRECT OBSERVATION:
+- Red cells: [Morphology findings]
+- White cells: [Differentiation, abnormalities, dysplasia]
+- Platelets: [Number estimation, morphology]
+- Background: [Background material]
+
+SIGNIFICANT FINDINGS:
+- Finding 1: [Name] - [Clinical significance]
+- Finding 2: [Name] - [Clinical significance]
+- Finding 3: [Name] - [Clinical significance]
+
+DIFFERENTIAL DIAGNOSIS:
+1. [Likely diagnosis]: [Why most likely]
+2. [Alternative]: [Why possible]
+3. [Alternative]: [Why possible]
+
+INVESTIGATIONS TO CONFIRM:
+- Next step 1: [Investigation]: [What will show]
+- Next step 2: [Investigation]: [What will show]
+
+CLINICAL IMPLICATIONS:
+- Diagnosis confirmed: [Treatment/Management]
+- Prognosis: [Outcome]
+- Follow-up: [Monitoring]
+
+LEARNING POINT:
+- Common pitfall: [What to watch]
+- Key discriminator: [What separates similar conditions]</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Short Case Topics <span class="card-tag">Examples</span></h3>
+          <div class="grid-2">
+            <ul>
+              <li>Iron deficiency anaemia blood film</li>
+              <li>Megaloblastic anaemia bone marrow</li>
+              <li>Sickle cell disease blood film</li>
+              <li>Beta-thalassaemia major blood film</li>
+              <li>Immune thrombocytopenia blood film</li>
+            </ul>
+            <ul>
+              <li>Thrombotic microangiopathy blood film</li>
+              <li>Acute leukaemia blood film (AML vs ALL)</li>
+              <li>Chronic myeloid leukaemia blood film</li>
+              <li>Hereditary spherocytosis blood film</li>
+              <li>PNH blood film</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Long Case Template (30 minutes) <span class="card-tag">3 Cases</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('longcase-template')">Copy Template</button>
+            <div class="template-box" id="longcase-template">LONG CASE NUMBER: [1-3]
+PRESENTATION: [Patient summary]
+DURATION: 30 minutes
+
+=== PRESENTED INVESTIGATIONS ===
+Investigation 1: [Name], Result: [Abnormal finding]
+Investigation 2: [Name], Result: [Abnormal finding]
+Investigation 3: [Name], Result: [Abnormal finding]
+
+QUESTIONS ASKED:
+1. What do these results show?
+2. What is your differential diagnosis?
+3. What further investigations would you do?
+4. What is the final diagnosis?
+5. How would you manage this patient?
+
+=== STRUCTURED ANSWER ===
+
+SYNTHESIS OF INVESTIGATIONS:
+[How all findings fit together]
+
+DIFFERENTIAL DIAGNOSIS:
+1. [Most likely]: [Why]
+2. [Alternative]: [Why possible]
+3. [Alternative]: [Why possible]
+
+CONFIRMATORY INVESTIGATIONS:
+- Investigation 1: [Why, what will show]
+- Investigation 2: [Why, what will show]
+
+FINAL DIAGNOSIS:
+[Confirmed by investigations]
+[Relevant guideline]
+
+MANAGEMENT PLAN:
+- Acute phase: [Immediate action]
+- Chronic management: [Long-term treatment]
+
+TEACHING POINT:
+- Key discriminator: [Challenge]
+- Common pitfall: [What to watch]</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HPLC Panel -->
+      <div class="content-panel" id="panel-hplc">
+        <div class="panel-header">
+          <h2>HPLC Interpretation</h2>
+          <p>Haemoglobin electrophoresis and HPLC case interpretation for Part 2.</p>
+        </div>
+
+        <div class="card">
+          <h3>HPLC Case Template <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('hplc-template')">Copy Template</button>
+            <div class="template-box" id="hplc-template">CASE NUMBER: [Within long case section]
+SAMPLE: HPLC / Capillary Electrophoresis
+
+PRESENTED RESULTS:
+- Patient age: [Age], ethnic background: [relevant]
+- Main abnormality: [Elevated/depressed/new peak]
+- Percentage: [Specific values]
+- Other findings: [RBC indices, clinical context]
+
+PEAK INTERPRETATION:
+- HbA: [Expected %, actual %]
+- HbA2: [Expected %, actual %]
+- HbF: [Expected %, actual %]
+- Abnormal peak: [Position, percentage, identity]
+
+DIFFERENTIAL DIAGNOSIS:
+1. [Most likely]: [Why]
+2. [Alternative]: [Why]
+3. [Alternative]: [Why]
+
+CONFIRMATORY TESTS:
+- Test 1: [What will confirm]
+- Test 2: [What will confirm]
+
+FINAL DIAGNOSIS:
+[Condition confirmed]
+
+CLINICAL IMPLICATIONS:
+- For this patient: [Management]
+- Genetic counselling: [Inheritance]
+- Family screening: [Who to test]
+
+INTERPRETATION PEARLS:
+- Pattern feature: [Key to diagnosis]
+- Common misinterpretation: [Trainee pitfall]</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>HPLC Interpretation Cases <span class="card-tag">Examples</span></h3>
+          <div class="grid-2">
+            <div class="domain-card">
+              <h4>Beta Thalassaemia Trait</h4>
+              <p>Elevated HbA2 (3.5-7%), normal/low HbF, microcytic indices</p>
+            </div>
+            <div class="domain-card">
+              <h4>Sickle Cell Disease (HbSS)</h4>
+              <p>HbS 80-95%, elevated HbF, absent HbA</p>
+            </div>
+            <div class="domain-card">
+              <h4>Haemoglobin SC Disease</h4>
+              <p>HbS ~50%, HbC ~50%, absent HbA</p>
+            </div>
+            <div class="domain-card">
+              <h4>Haemoglobin H Disease</h4>
+              <p>HbH peak, severely microcytic, HbA2 often low</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Haemostasis Panel -->
+      <div class="content-panel" id="panel-haemostasis">
+        <div class="panel-header">
+          <h2>Haemostasis and Thrombosis Day</h2>
+          <p>8 advanced cases with multi-part questions (~11 minutes each)</p>
+        </div>
+
+        <div class="card">
+          <h3>Haemostasis Case Template <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('haemostasis-template')">Copy Template</button>
+            <div class="template-box" id="haemostasis-template">HAEMOSTASIS QUESTION: [Case 1-8]
+COMPLEXITY LEVEL: Advanced
+TIME: ~11 minutes
+
+CLINICAL SCENARIO:
+[2-3 sentence patient presentation]
+
+INVESTIGATIONS PRESENTED:
+- PT: [value] (normal range)
+- APTT: [value] (normal range)
+- Fibrinogen: [value]
+- Thrombin time: [value]
+- Platelets: [value]
+- Other tests: [as relevant]
+
+SUBQUESTION 1: INITIAL INTERPRETATION
+- Identify abnormalities
+- Pathway affected
+- Differential diagnosis
+
+SUBQUESTION 2: DIAGNOSTIC APPROACH
+- Mixing study indication
+- Targeted tests
+- Referral thresholds
+
+SUBQUESTION 3: FURTHER RESULTS
+- Integrate new information
+- Refine diagnosis
+
+SUBQUESTION 4: MANAGEMENT
+- Immediate intervention
+- Acute treatment
+- Long-term management
+- Monitoring
+
+SUBQUESTION 5: COMPLICATION/FOLLOW-UP
+- Long-term management
+- Patient education
+- Prognosis</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Haemostasis Case Examples <span class="card-tag">8 Cases</span></h3>
+          <div class="grid-2">
+            <div class="domain-card">
+              <h4>VWD Type 1</h4>
+              <p>Mucocutaneous bleeding, low VWF, prolonged APTT</p>
+            </div>
+            <div class="domain-card">
+              <h4>HIT</h4>
+              <p>Thrombocytopenia with thrombosis, 4T score, SRA</p>
+            </div>
+            <div class="domain-card">
+              <h4>Lupus Anticoagulant/APS</h4>
+              <p>Prolonged APTT, dRVVT, thrombosis history</p>
+            </div>
+            <div class="domain-card">
+              <h4>DIC in Sepsis</h4>
+              <p>Consumptive coagulopathy, scoring, management</p>
+            </div>
+            <div class="domain-card">
+              <h4>Factor XI Deficiency</h4>
+              <p>Isolated APTT prolongation, bleeding with surgery</p>
+            </div>
+            <div class="domain-card">
+              <h4>Antithrombin Deficiency</h4>
+              <p>Heparin resistance, recurrent VTE</p>
+            </div>
+            <div class="domain-card">
+              <h4>Prothrombin G20210A</h4>
+              <p>Arterial stroke, thrombophilia workup</p>
+            </div>
+            <div class="domain-card">
+              <h4>Bernard-Soulier Syndrome</h4>
+              <p>Giant platelets, aggregation pattern</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transfusion Panel -->
+      <div class="content-panel" id="panel-transfusion">
+        <div class="panel-header">
+          <h2>Transfusion Medicine Day</h2>
+          <p>8 advanced cases covering blood bank and transfusion complications</p>
+        </div>
+
+        <div class="card">
+          <h3>Transfusion Case Template <span class="card-tag">Template</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyTemplate('transfusion-template')">Copy Template</button>
+            <div class="template-box" id="transfusion-template">TRANSFUSION QUESTION: [Case 1-8]
+COMPLEXITY: Advanced
+TIME: ~11 minutes
+
+CLINICAL SCENARIO:
+[Presentation requiring transfusion decision]
+
+RELEVANT INVESTIGATIONS:
+- FBC: [values]
+- Coagulation: [if relevant]
+- Blood bank: [grouping, antibody screen]
+
+SUBQUESTION 1: Indications for transfusion
+- Threshold considerations
+- Component selection
+- Urgency assessment
+
+SUBQUESTION 2: Blood bank communication
+- Special requirements
+- Compatibility issues
+- Time-critical decisions
+
+SUBQUESTION 3: Reaction/complication management
+- Recognition
+- Immediate actions
+- Investigation
+
+SUBQUESTION 4: Patient counselling
+- Information provision
+- Consent
+- Alternatives
+
+SUBQUESTION 5: Long-term considerations
+- Alloimmunisation risk
+- Future transfusion planning
+- Documentation</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Transfusion Case Examples <span class="card-tag">8 Cases</span></h3>
+          <div class="grid-2">
+            <div class="domain-card">
+              <h4>Acute Haemolytic Reaction</h4>
+              <p>ABO incompatibility, immediate management, investigation</p>
+            </div>
+            <div class="domain-card">
+              <h4>AIHA with Transfusion Needs</h4>
+              <p>Compatibility challenges, least incompatible blood</p>
+            </div>
+            <div class="domain-card">
+              <h4>Anti-D Under-dosing</h4>
+              <p>Sensitisation risk, Kleihauer, prophylaxis calculation</p>
+            </div>
+            <div class="domain-card">
+              <h4>Platelet Refractoriness</h4>
+              <p>Immune vs non-immune, HLA matching, investigation</p>
+            </div>
+            <div class="domain-card">
+              <h4>TRALI</h4>
+              <p>Respiratory distress, differentiation from TACO, management</p>
+            </div>
+            <div class="domain-card">
+              <h4>Thalassaemia Major Transfusion</h4>
+              <p>Chronic transfusion, extended matching, iron overload</p>
+            </div>
+            <div class="domain-card">
+              <h4>Transfusion in Pregnancy</h4>
+              <p>HDN prevention, anti-D, monitoring</p>
+            </div>
+            <div class="domain-card">
+              <h4>Massive Haemorrhage Protocol</h4>
+              <p>Activation criteria, component ratios, damage control</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Viva Panels -->
+      <div class="content-panel" id="panel-viva-general">
+        <div class="panel-header">
+          <h2>Viva Station 1: General Haematology</h2>
+          <p>3 cases covering anaemia, acute leukaemia, and bone marrow failure</p>
+        </div>
+
+        <div class="card">
+          <h3>Viva Assessment Criteria <span class="card-tag">Marking</span></h3>
+          <div class="grid-3">
+            <div class="domain-card">
+              <h4>Knowledge</h4>
+              <p>Accuracy and depth of information</p>
+            </div>
+            <div class="domain-card">
+              <h4>Communication</h4>
+              <p>Clarity and structure of responses</p>
+            </div>
+            <div class="domain-card">
+              <h4>Clinical Reasoning</h4>
+              <p>Logical decision-making process</p>
+            </div>
+            <div class="domain-card">
+              <h4>Pragmatism</h4>
+              <p>Real-world focus and practicality</p>
+            </div>
+            <div class="domain-card">
+              <h4>Safety Awareness</h4>
+              <p>Recognition of risks and complications</p>
+            </div>
+            <div class="domain-card">
+              <h4>Professionalism</h4>
+              <p>Appropriate conduct and judgement</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Station 1 Cases <span class="card-tag">3 Cases</span></h3>
+          <div class="grid-3">
+            <div class="domain-card">
+              <h4>Case 1</h4>
+              <p>Anaemia diagnosis and management approach</p>
+            </div>
+            <div class="domain-card">
+              <h4>Case 2</h4>
+              <p>Acute leukaemia presenting features and initial workup</p>
+            </div>
+            <div class="domain-card">
+              <h4>Case 3</h4>
+              <p>Bone marrow failure or MDS evaluation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-panel" id="panel-viva-haemostasis">
+        <div class="panel-header">
+          <h2>Viva Station 2: Haemostasis and Thrombosis</h2>
+          <p>3 cases covering bleeding disorders, thrombophilia, and anticoagulation</p>
+        </div>
+
+        <div class="card">
+          <h3>Station 2 Cases <span class="card-tag">3 Cases</span></h3>
+          <div class="grid-3">
+            <div class="domain-card">
+              <h4>Case 1</h4>
+              <p>Acute bleeding disorder diagnosis</p>
+            </div>
+            <div class="domain-card">
+              <h4>Case 2</h4>
+              <p>Thrombophilia or inherited thrombotic tendency</p>
+            </div>
+            <div class="domain-card">
+              <h4>Case 3</h4>
+              <p>Anticoagulation complications</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-panel" id="panel-viva-transfusion">
+        <div class="panel-header">
+          <h2>Viva Station 3: Transfusion Medicine</h2>
+          <p>3 cases covering reactions, complex blood bank issues, and special populations</p>
+        </div>
+
+        <div class="card">
+          <h3>Station 3 Cases <span class="card-tag">3 Cases</span></h3>
+          <div class="grid-3">
+            <div class="domain-card">
+              <h4>Case 1</h4>
+              <p>Transfusion reaction management</p>
+            </div>
+            <div class="domain-card">
+              <h4>Case 2</h4>
+              <p>Complex blood bank issue</p>
+            </div>
+            <div class="domain-card">
+              <h4>Case 3</h4>
+              <p>Transfusion in special population</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-panel" id="panel-viva-malignant">
+        <div class="panel-header">
+          <h2>Viva Station 4: Malignant Haematology</h2>
+          <p>3 cases covering lymphoma, leukaemia treatment, and complications</p>
+        </div>
+
+        <div class="card">
+          <h3>Station 4 Cases <span class="card-tag">3 Cases</span></h3>
+          <div class="grid-3">
+            <div class="domain-card">
+              <h4>Case 1</h4>
+              <p>Lymphoma diagnosis and staging</p>
+            </div>
+            <div class="domain-card">
+              <h4>Case 2</h4>
+              <p>Leukaemia treatment planning</p>
+            </div>
+            <div class="domain-card">
+              <h4>Case 3</h4>
+              <p>Complications of therapy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Generator Panel -->
+      <div class="content-panel" id="panel-generator">
+        <div class="panel-header">
+          <h2>Question Generator</h2>
+          <p>Generate exam questions using the framework templates with AI assistance.</p>
+        </div>
+
+        <div class="card">
+          <h3>Generate Question <span class="card-tag">AI-Assisted</span></h3>
+
+          <div class="form-group">
+            <label class="form-label">Question Type</label>
+            <select class="form-select" id="questionType">
+              <option value="">Select question type...</option>
+              <optgroup label="Part 1">
+                <option value="emq">Extended Matching Question (EMQ)</option>
+                <option value="mcq">Multiple Choice Question (MCQ)</option>
+                <option value="essay">Essay Question</option>
+                <option value="critical">Critical Investigation Review</option>
+              </optgroup>
+              <optgroup label="Part 2">
+                <option value="shortcase">Morphology Short Case</option>
+                <option value="longcase">Morphology Long Case</option>
+                <option value="hplc">HPLC Interpretation Case</option>
+                <option value="haemostasis">Haemostasis Case</option>
+                <option value="transfusion">Transfusion Case</option>
+              </optgroup>
+              <optgroup label="Viva">
+                <option value="viva">Viva Station Case</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Clinical Domain</label>
+            <select class="form-select" id="clinicalDomain">
+              <option value="">Select domain...</option>
+              <option value="anaemia">Anaemia and Iron Metabolism</option>
+              <option value="haemoglobinopathy">Haemoglobinopathies</option>
+              <option value="morphology">Blood Film Morphology</option>
+              <option value="bonemarrow">Bone Marrow Assessment</option>
+              <option value="leucocytosis">Leucocytosis</option>
+              <option value="cytopenia">Cytopenias</option>
+              <option value="coagulation">Coagulation and Haemostasis</option>
+              <option value="thrombophilia">Thrombophilia</option>
+              <option value="transfusion">Transfusion Medicine</option>
+              <option value="redcell">Red Cell Disorders</option>
+              <option value="platelet">Platelet Disorders</option>
+              <option value="systemic">Haemostasis in Systemic Disease</option>
+              <option value="malignant">Malignant Haematology</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Difficulty Level</label>
+            <select class="form-select" id="difficultyLevel">
+              <option value="foundation">Foundation</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Specific Topic (optional)</label>
+            <input type="text" class="form-input" id="specificTopic" placeholder="e.g., Von Willebrand disease, DIC, TTP...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Additional Instructions (optional)</label>
+            <textarea class="form-textarea" id="additionalInstructions" placeholder="Any specific requirements or focus areas..."></textarea>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="generatePrompt()">Generate AI Prompt</button>
+            <button class="btn btn-secondary" onclick="clearGenerator()">Clear</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Generated Prompt <span class="card-tag">Copy for AI</span></h3>
+          <div class="relative">
+            <button class="copy-btn" onclick="copyOutput()">Copy Prompt</button>
+            <div class="output-area" id="generatedOutput">
+              <p style="text-align: center; color: var(--muted);">Select options above and click "Generate AI Prompt" to create a structured prompt for generating exam questions.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>How to Use</strong>
+          <p>1. Select your question type, domain, and difficulty level<br>
+          2. Click "Generate AI Prompt" to create a structured prompt<br>
+          3. Copy the prompt and paste it into Claude or another AI assistant<br>
+          4. The AI will generate questions following the framework templates</p>
+        </div>
+      </div>
+
+      <!-- Guidelines Panel -->
+      <div class="content-panel" id="panel-guidelines">
+        <div class="panel-header">
+          <h2>Guideline Alignment</h2>
+          <p>Quality assurance checklist and maintenance schedule for exam materials.</p>
+        </div>
+
+        <div class="card">
+          <h3>Quality Checklist <span class="card-tag">Per Question</span></h3>
+          <ul class="checklist">
+            <li>Based on current guideline (year specified)</li>
+            <li>Reflects best practice in UK context</li>
+            <li>Uses appropriate terminology</li>
+            <li>Includes management aligned with guideline</li>
+            <li>Safety aspects highlighted</li>
+            <li>Patient perspective considered</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Maintenance Schedule <span class="card-tag">Updates</span></h3>
+          <div class="grid-2">
+            <div>
+              <h4 class="mb-4">Annual Review</h4>
+              <ul>
+                <li>Update guidelines as new versions released</li>
+                <li>Add new case scenarios from clinical practice</li>
+                <li>Retire outdated questions</li>
+                <li>Incorporate trainee feedback</li>
+                <li>Monitor FRCPath exam changes</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="mb-4">Quarterly Additions</h4>
+              <ul>
+                <li>New cases from national haematology meetings</li>
+                <li>NEQAS challenges (when available)</li>
+                <li>Recent literature highlights</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <strong>Version Information</strong>
+          <p>Framework Version 1.0 | Created by Dr Abdul Mannan FRCPath FCPS<br>
+          Bangor Haemophilia Centre, Betsi Cadwaladr University Health Board<br>
+          Last Updated: February 2026 | Next Review: February 2027</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>Blood🩸Doctor | Dr Abdul Mannan FRCPath FCPS | #BloodDoctor</div>
+    <div>blooddoctor.co@gmail.com</div>
+  </footer>
+
+  <script>
+    // Navigation
+    function showSection(section) {
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.section === section) link.classList.add('active');
+      });
+
+      // Map sections to panels
+      const sectionMap = {
+        'overview': 'overview',
+        'part1': 'emq',
+        'part2': 'morphology',
+        'viva': 'viva-general',
+        'generator': 'generator',
+        'guidelines': 'guidelines'
+      };
+
+      showPanel(sectionMap[section] || section);
+    }
+
+    function showPanel(panelId) {
+      document.querySelectorAll('.content-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      const panel = document.getElementById('panel-' + panelId);
+      if (panel) panel.classList.add('active');
+
+      const sidebarItem = document.querySelector(`.sidebar-item[data-panel="${panelId}"]`);
+      if (sidebarItem) sidebarItem.classList.add('active');
+    }
+
+    // Event listeners
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => showSection(link.dataset.section));
+    });
+
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.addEventListener('click', () => showPanel(item.dataset.panel));
+    });
+
+    // Copy functions
+    function copyTemplate(templateId) {
+      const template = document.getElementById(templateId);
+      navigator.clipboard.writeText(template.textContent).then(() => {
+        const btn = template.parentElement.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy Template', 2000);
+      });
+    }
+
+    function copyOutput() {
+      const output = document.getElementById('generatedOutput');
+      navigator.clipboard.writeText(output.textContent).then(() => {
+        const btn = output.parentElement.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy Prompt', 2000);
+      });
+    }
+
+    // Generator
+    function generatePrompt() {
+      const type = document.getElementById('questionType').value;
+      const domain = document.getElementById('clinicalDomain').value;
+      const difficulty = document.getElementById('difficultyLevel').value;
+      const topic = document.getElementById('specificTopic').value;
+      const instructions = document.getElementById('additionalInstructions').value;
+
+      if (!type || !domain) {
+        alert('Please select at least a question type and clinical domain.');
+        return;
+      }
+
+      const typeNames = {
+        'emq': 'Extended Matching Question (EMQ)',
+        'mcq': 'Multiple Choice Question (MCQ)',
+        'essay': 'Essay Question',
+        'critical': 'Critical Investigation Review',
+        'shortcase': 'Morphology Short Case',
+        'longcase': 'Morphology Long Case',
+        'hplc': 'HPLC Interpretation Case',
+        'haemostasis': 'Haemostasis Case',
+        'transfusion': 'Transfusion Case',
+        'viva': 'Viva Station Case'
+      };
+
+      const domainNames = {
+        'anaemia': 'Anaemia and Iron Metabolism',
+        'haemoglobinopathy': 'Haemoglobinopathies and Variants',
+        'morphology': 'Blood Film Morphology',
+        'bonemarrow': 'Bone Marrow Assessment',
+        'leucocytosis': 'Leucocytosis and Differential',
+        'cytopenia': 'Leucopenia and Immune Cytopenias',
+        'coagulation': 'Coagulation and Haemostasis',
+        'thrombophilia': 'Thrombophilia Screening',
+        'transfusion': 'Transfusion Blood Bank',
+        'redcell': 'Red Cell Disorders',
+        'platelet': 'Platelet and Megakaryocytic Disorders',
+        'systemic': 'Haemostatic Abnormalities in Systemic Disease',
+        'malignant': 'Malignant Haematology'
+      };
+
+      let prompt = `You are an expert FRCPath haematology examiner creating high-quality exam questions. Generate a ${typeNames[type]} for the FRCPath haematology examination.
+
+**Parameters:**
+- Question Type: ${typeNames[type]}
+- Clinical Domain: ${domainNames[domain]}
+- Difficulty Level: ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+${topic ? `- Specific Topic: ${topic}` : ''}
+${instructions ? `- Additional Requirements: ${instructions}` : ''}
+
+**Framework Requirements:**
+1. All content must be evidence-based and aligned with current BSH, ISTH, NICE, and UK guidelines
+2. Questions must reflect real-world haematology practice
+3. Include transparent reasoning explaining why correct answers are right and distractors are wrong
+4. Map content to relevant guidelines with specific references where possible
+
+`;
+
+      // Add type-specific templates
+      const templates = {
+        'emq': `**EMQ Structure Required:**
+- Theme: Clear clinical or laboratory scenario
+- Clinical Scenario: 2-3 sentence patient presentation with key investigations
+- Lead-in Question: Specific clinical question
+- Options: 6-12 options (each may be used 0, 1, or multiple times)
+- Questions: 4-5 linked questions per theme
+
+**Answer Structure:**
+- Correct Answer & Rationale (100-150 words per question)
+- Why Other Options Are Wrong (50-80 words per distractor)
+- Clinical Pearl for each question`,
+
+        'mcq': `**MCQ Structure Required:**
+- Stem: Clinical scenario (1-3 sentences) with clear question
+- Options: Five options (A-E), one clearly correct
+- Difficulty appropriate to ${difficulty} level
+
+**Answer Framework:**
+- Correct Answer explanation (120-150 words)
+- Distractor Analysis (40-60 words each for A, B, D, E)
+- Related Learning Points and guideline references`,
+
+        'essay': `**Essay Structure Required (20 marks total):**
+- Introduction (2 marks): 80-120 words
+- Main Body Section 1 (5-6 marks): 200-250 words
+- Main Body Section 2 (5-6 marks): 200-250 words
+- Main Body Section 3 (4-5 marks): 150-200 words
+- Conclusion (2-3 marks): 100-120 words
+
+Total word count: 800-950 words
+Include guideline alignment and key references`,
+
+        'critical': `**Critical Investigation Review Structure:**
+- Investigation name, principle, methodology
+- Normal range and clinical applications
+- Interpretation guidance (high, low, borderline results)
+- Limitations and pitfalls
+- Interpretive hierarchy (what comes first/next)
+- Case application example`,
+
+        'shortcase': `**Short Case Structure (9 minutes):**
+- Material type (blood film/BM aspirate/trephine)
+- Direct observation of RBC, WBC, platelets
+- Significant findings with clinical significance
+- Differential diagnosis (ranked)
+- Investigations to confirm
+- Learning point and common pitfalls`,
+
+        'longcase': `**Long Case Structure (30 minutes):**
+- Patient presentation summary
+- Multiple investigations presented
+- Exam questions (interpretation, differential, investigations, diagnosis, management)
+- Structured answer with synthesis
+- Teaching point`,
+
+        'hplc': `**HPLC Case Structure:**
+- Patient demographics and clinical context
+- HPLC/electrophoresis results with percentages
+- Peak interpretation
+- Differential diagnosis
+- Confirmatory tests
+- Clinical implications and genetic counselling`,
+
+        'haemostasis': `**Haemostasis Case Structure (~11 minutes):**
+- Clinical scenario (2-3 sentences)
+- Coagulation investigations presented
+- 5 subquestions: Initial interpretation, Diagnostic approach, Further results, Management, Follow-up
+- Advanced complexity level`,
+
+        'transfusion': `**Transfusion Case Structure (~11 minutes):**
+- Clinical scenario requiring transfusion decision
+- Relevant investigations
+- 5 subquestions: Indications, Blood bank communication, Reaction management, Patient counselling, Long-term considerations`,
+
+        'viva': `**Viva Case Structure:**
+- Assessment criteria: Knowledge, Communication, Clinical Reasoning, Pragmatism, Safety Awareness
+- Case presentation with progressive questioning
+- Expected candidate responses at different levels`
+      };
+
+      prompt += templates[type] || '';
+
+      prompt += `
+
+**Output Format:**
+Generate a complete, ready-to-use exam question with full model answer following the structure above. Ensure clinical accuracy and guideline alignment throughout.`;
+
+      document.getElementById('generatedOutput').innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit; margin: 0;">${prompt}</pre>`;
+    }
+
+    function clearGenerator() {
+      document.getElementById('questionType').value = '';
+      document.getElementById('clinicalDomain').value = '';
+      document.getElementById('difficultyLevel').value = 'foundation';
+      document.getElementById('specificTopic').value = '';
+      document.getElementById('additionalInstructions').value = '';
+      document.getElementById('generatedOutput').innerHTML = '<p style="text-align: center; color: var(--muted);">Select options above and click "Generate AI Prompt" to create a structured prompt for generating exam questions.</p>';
+    }
+
+    // Mobile menu
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('mobile-open');
+    });
+  </script>
+</body>
+</html>

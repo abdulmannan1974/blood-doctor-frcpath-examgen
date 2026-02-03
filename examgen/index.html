@@ -119,36 +119,6 @@
       padding: 0 5vw 60px;
     }
 
-    /* Tabs */
-    .tabs {
-      display: flex;
-      gap: 4px;
-      background: var(--mist);
-      padding: 6px;
-      border-radius: 14px;
-      width: fit-content;
-      margin: 0 auto 30px;
-    }
-
-    .tab {
-      padding: 12px 24px;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-
-    .tab:hover { background: rgba(255,255,255,0.5); }
-    .tab.active { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-
-    /* Tab Panels */
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-
     /* Grid Layout */
     .grid-2 {
       display: grid;
@@ -166,6 +136,7 @@
       border-radius: var(--radius);
       padding: 24px;
       box-shadow: var(--shadow);
+      margin-bottom: 20px;
     }
 
     .card h3 {
@@ -281,50 +252,10 @@
       border: 1px solid rgba(17,19,26,0.1);
     }
 
-    .file-chip-icon {
-      width: 20px;
-      height: 20px;
-    }
-
     .file-chip-remove {
       cursor: pointer;
       color: var(--blood);
       font-weight: bold;
-    }
-
-    /* URL Input Group */
-    .url-input-group {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .url-input-group input {
-      flex: 1;
-    }
-
-    .url-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .url-chip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      background: var(--mist);
-      border-radius: 10px;
-      font-size: 0.85rem;
-    }
-
-    .url-chip-text {
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      margin-right: 12px;
     }
 
     /* Buttons */
@@ -352,11 +283,6 @@
     .btn-primary:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 16px 40px rgba(139,14,28,0.3);
-    }
-
-    .btn-primary:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
     }
 
     .btn-secondary {
@@ -436,153 +362,60 @@
       opacity: 0.5;
     }
 
-    /* Generated Question Styling */
-    .generated-question {
-      line-height: 1.7;
-    }
-
-    .generated-question h1, .generated-question h2, .generated-question h3 {
-      font-family: 'Fraunces', serif;
-      margin-top: 24px;
-      margin-bottom: 12px;
-      color: var(--blood);
-    }
-
-    .generated-question h1 { font-size: 1.5rem; }
-    .generated-question h2 { font-size: 1.3rem; }
-    .generated-question h3 { font-size: 1.1rem; }
-
-    .generated-question p {
-      margin-bottom: 12px;
-    }
-
-    .generated-question ul, .generated-question ol {
-      margin-bottom: 12px;
-      padding-left: 24px;
-    }
-
-    .generated-question li {
-      margin-bottom: 6px;
-    }
-
-    .generated-question strong {
-      color: var(--blood);
-    }
-
-    .generated-question code {
-      background: var(--mist);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.9em;
-    }
-
-    .generated-question pre {
-      background: var(--mist);
-      padding: 16px;
+    /* Prompt Output for Claude Code */
+    .prompt-output {
+      background: #1e1e2e;
+      color: #cdd6f4;
       border-radius: 12px;
-      overflow-x: auto;
-      margin-bottom: 12px;
+      padding: 20px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 500px;
+      overflow-y: auto;
     }
 
-    .generated-question blockquote {
-      border-left: 4px solid var(--blood);
-      padding-left: 16px;
-      margin: 16px 0;
-      color: var(--muted);
+    .prompt-output .highlight {
+      color: #f5c2e7;
     }
 
-    .generated-question hr {
-      border: none;
-      border-top: 2px solid var(--mist);
-      margin: 24px 0;
+    .prompt-output .comment {
+      color: #6c7086;
     }
 
-    .generated-question table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0;
-    }
-
-    .generated-question th, .generated-question td {
-      border: 1px solid rgba(17,19,26,0.1);
-      padding: 10px 12px;
-      text-align: left;
-    }
-
-    .generated-question th {
-      background: var(--mist);
-      font-weight: 600;
-    }
-
-    /* Loading State */
-    .loading {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 300px;
-    }
-
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid var(--mist);
-      border-top-color: var(--blood);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .loading-text {
-      margin-top: 16px;
-      font-weight: 600;
-      color: var(--muted);
-    }
-
-    /* API Key Section */
-    .api-key-section {
-      background: linear-gradient(135deg, var(--rose) 0%, var(--ivory) 100%);
+    /* Instructions Panel */
+    .instructions-panel {
+      background: linear-gradient(135deg, var(--teal-soft) 0%, #e8f5f3 100%);
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 20px;
+      border: 1px solid rgba(15, 118, 110, 0.2);
     }
 
-    .api-key-section h4 {
-      font-size: 1rem;
+    .instructions-panel h4 {
+      color: var(--teal);
       margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .api-key-input-group {
-      display: flex;
-      gap: 8px;
+    .instructions-panel ol {
+      padding-left: 20px;
+      line-height: 1.8;
     }
 
-    .api-key-input-group input {
-      flex: 1;
+    .instructions-panel li {
+      margin-bottom: 8px;
     }
 
-    .api-status {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.85rem;
-      margin-top: 8px;
-    }
-
-    .api-status.connected { color: var(--teal); }
-    .api-status.disconnected { color: var(--blood); }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: currentColor;
+    .instructions-panel code {
+      background: rgba(15, 118, 110, 0.15);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.9em;
     }
 
     /* Source Preview */
@@ -634,42 +467,6 @@
       text-align: center;
     }
 
-    /* History Panel */
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .history-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 18px;
-      background: var(--mist);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .history-item:hover {
-      background: var(--ivory);
-    }
-
-    .history-item-info {
-      flex: 1;
-    }
-
-    .history-item-title {
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .history-item-meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
     /* Callout */
     .callout {
       background: var(--teal-soft);
@@ -682,6 +479,11 @@
     .callout.warning {
       background: #fff3e6;
       border: 1px solid rgba(215,163,93,0.4);
+    }
+
+    .callout.info {
+      background: var(--rose);
+      border: 1px solid rgba(139,14,28,0.2);
     }
 
     .callout strong {
@@ -704,47 +506,7 @@
       font-size: 0.9rem;
     }
 
-    /* Utility */
-    .text-center { text-align: center; }
-    .mt-4 { margin-top: 16px; }
-    .mb-4 { margin-bottom: 16px; }
-
-    /* Domain selector grid */
-    .domain-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .domain-option {
-      padding: 12px;
-      border-radius: 10px;
-      background: var(--mist);
-      cursor: pointer;
-      transition: all 0.2s;
-      border: 2px solid transparent;
-      font-size: 0.85rem;
-    }
-
-    .domain-option:hover {
-      background: var(--ivory);
-    }
-
-    .domain-option.selected {
-      border-color: var(--blood);
-      background: var(--rose);
-    }
-
-    /* Image preview */
-    .image-preview {
-      max-width: 100%;
-      max-height: 200px;
-      border-radius: 12px;
-      margin-top: 12px;
-    }
-
-    /* Toast notifications */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 24px;
@@ -768,6 +530,92 @@
 
     .toast.success { background: var(--teal); }
     .toast.error { background: var(--blood); }
+
+    /* Step indicator */
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--mist);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .step.active {
+      background: var(--blood);
+      color: white;
+    }
+
+    .step.completed {
+      background: var(--teal);
+      color: white;
+    }
+
+    .step-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    /* URL Input */
+    .url-input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .url-input-group input {
+      flex: 1;
+    }
+
+    .url-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .url-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--mist);
+      border-radius: 10px;
+      font-size: 0.85rem;
+    }
+
+    .url-chip-text {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-right: 12px;
+    }
+
+    /* Copy success animation */
+    @keyframes copySuccess {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .copy-success {
+      animation: copySuccess 0.3s ease;
+    }
   </style>
 </head>
 <body>
@@ -775,10 +623,7 @@
   <nav class="nav">
     <div class="brand">Blood🩸Doctor</div>
     <div class="nav-pills">
-      <button class="nav-pill active" data-tab="generator">Generator</button>
-      <button class="nav-pill" data-tab="templates">Templates</button>
-      <button class="nav-pill" data-tab="history">History</button>
-      <button class="nav-pill" data-tab="settings">Settings</button>
+      <span class="pill" style="background: var(--teal-soft); color: var(--teal);">Claude Code Edition</span>
     </div>
   </nav>
 
@@ -786,225 +631,167 @@
   <header class="hero">
     <div class="pill">#BloodDoctor | FRCPath Haematology</div>
     <h1>AI Exam Question Generator</h1>
-    <p>Upload PDFs, documents, images, or paste URLs to generate complete FRCPath exam questions with detailed answers and explanations.</p>
+    <p>Upload your source materials, configure settings, and generate a prompt to paste into Claude Code for complete exam questions.</p>
   </header>
 
   <!-- Main Container -->
   <main class="container">
-    <!-- Generator Tab -->
-    <div class="tab-panel active" id="panel-generator">
-      <div class="grid-2">
-        <!-- Left Column - Input -->
-        <div>
-          <!-- API Key Section -->
-          <div class="api-key-section">
-            <h4>🔑 Claude API Key</h4>
-            <div class="api-key-input-group">
-              <input type="password" class="form-input" id="apiKey" placeholder="sk-ant-api...">
-              <button class="btn btn-small btn-secondary" onclick="toggleApiKey()">Show</button>
-              <button class="btn btn-small btn-teal" onclick="saveApiKey()">Save</button>
-            </div>
-            <div class="api-status disconnected" id="apiStatus">
-              <span class="status-dot"></span>
-              <span>Not connected</span>
-            </div>
-          </div>
+    <!-- Instructions Panel -->
+    <div class="instructions-panel">
+      <h4>📋 How to Use with Claude Code</h4>
+      <ol>
+        <li><strong>Upload sources</strong> - Add PDFs, Word docs, Excel files, images, or URLs below</li>
+        <li><strong>Configure settings</strong> - Choose question type, difficulty, and number of questions</li>
+        <li><strong>Generate prompt</strong> - Click the button to create your prompt</li>
+        <li><strong>Copy the prompt</strong> - Use the copy button to copy everything</li>
+        <li><strong>Paste into Claude Code</strong> - Claude will generate complete questions with answers!</li>
+      </ol>
+    </div>
 
-          <!-- Source Upload Card -->
-          <div class="card mb-4">
-            <h3>📁 Upload Sources <span class="card-tag">Multiple Formats</span></h3>
-
-            <!-- File Upload Zone -->
-            <div class="upload-zone" id="uploadZone">
-              <div class="upload-icon">📄</div>
-              <div class="upload-text">Drop files here or click to upload</div>
-              <div class="upload-hint">PDF, Word, Excel, Images (JPG, PNG), Videos (MP4)</div>
-              <input type="file" class="file-input" id="fileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.mp4,.mov,.webm">
-            </div>
-            <div class="file-list" id="fileList"></div>
-
-            <!-- URL Input -->
-            <div class="form-group mt-4">
-              <label class="form-label">🔗 Add URL (Website or YouTube)</label>
-              <div class="url-input-group">
-                <input type="url" class="form-input" id="urlInput" placeholder="https://example.com or YouTube URL">
-                <button class="btn btn-small btn-secondary" onclick="addUrl()">Add</button>
-              </div>
-              <div class="url-list" id="urlList"></div>
-            </div>
-
-            <!-- Source Preview -->
-            <div class="source-preview" id="sourcePreview" style="display: none;">
-              <div class="source-preview-header">📝 Extracted Content Preview</div>
-              <div id="sourcePreviewContent"></div>
-            </div>
-          </div>
-
-          <!-- Question Settings Card -->
-          <div class="card">
-            <h3>⚙️ Question Settings <span class="card-tag">Configure</span></h3>
-
-            <div class="form-group">
-              <label class="form-label">Question Type</label>
-              <select class="form-select" id="questionType">
-                <option value="emq">Extended Matching Question (EMQ)</option>
-                <option value="mcq">Multiple Choice Question (MCQ)</option>
-                <option value="essay">Essay Question</option>
-                <option value="saq">Short Answer Question (SAQ)</option>
-                <option value="case">Clinical Case Study</option>
-                <option value="morphology">Morphology Case</option>
-                <option value="hplc">HPLC Interpretation</option>
-                <option value="viva">Viva Question</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Difficulty Level</label>
-              <select class="form-select" id="difficulty">
-                <option value="foundation">Foundation (ST3-4)</option>
-                <option value="intermediate">Intermediate (ST5-6)</option>
-                <option value="advanced">Advanced (ST7 / Consultant)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Number of Questions</label>
-              <div class="count-selector">
-                <button class="count-btn" onclick="adjustCount(-1)">−</button>
-                <span class="count-display" id="questionCount">3</span>
-                <button class="count-btn" onclick="adjustCount(1)">+</button>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Clinical Domain (Optional)</label>
-              <select class="form-select" id="clinicalDomain">
-                <option value="">Auto-detect from source</option>
-                <option value="anaemia">Anaemia & Iron Metabolism</option>
-                <option value="haemoglobinopathy">Haemoglobinopathies</option>
-                <option value="coagulation">Coagulation & Haemostasis</option>
-                <option value="thrombosis">Thrombosis & Thrombophilia</option>
-                <option value="transfusion">Transfusion Medicine</option>
-                <option value="malignant">Malignant Haematology</option>
-                <option value="morphology">Blood Film Morphology</option>
-                <option value="bonemarrow">Bone Marrow Assessment</option>
-                <option value="platelet">Platelet Disorders</option>
-                <option value="redcell">Red Cell Disorders</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Additional Instructions (Optional)</label>
-              <textarea class="form-textarea" id="additionalInstructions" placeholder="Focus on specific topics, include certain scenarios, etc."></textarea>
-            </div>
-
-            <div class="btn-group">
-              <button class="btn btn-primary" id="generateBtn" onclick="generateQuestions()">
-                🚀 Generate Questions
-              </button>
-              <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column - Output -->
-        <div>
-          <div class="output-container">
-            <div class="output-header">
-              <h3>📋 Generated Questions</h3>
-              <div class="output-actions">
-                <button class="btn btn-small btn-secondary" onclick="copyOutput()">📋 Copy</button>
-                <button class="btn btn-small btn-secondary" onclick="downloadOutput()">💾 Download</button>
-                <button class="btn btn-small btn-teal" onclick="regenerate()">🔄 Regenerate</button>
-              </div>
-            </div>
-            <div class="output-body" id="outputBody">
-              <div class="output-placeholder">
-                <div class="output-placeholder-icon">📝</div>
-                <div>Your generated questions will appear here</div>
-                <div style="font-size: 0.85rem; margin-top: 8px;">Upload sources and click "Generate Questions"</div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Step Indicator -->
+    <div class="step-indicator">
+      <div class="step active" id="step1">
+        <span class="step-number">1</span>
+        <span>Add Sources</span>
+      </div>
+      <div class="step" id="step2">
+        <span class="step-number">2</span>
+        <span>Configure</span>
+      </div>
+      <div class="step" id="step3">
+        <span class="step-number">3</span>
+        <span>Generate</span>
       </div>
     </div>
 
-    <!-- Templates Tab -->
-    <div class="tab-panel" id="panel-templates">
-      <div class="card">
-        <h3>📚 Question Templates <span class="card-tag">Reference</span></h3>
-        <p class="mb-4">These templates guide the AI in generating properly structured exam questions.</p>
+    <div class="grid-2">
+      <!-- Left Column - Input -->
+      <div>
+        <!-- Source Upload Card -->
+        <div class="card">
+          <h3>📁 Upload Sources <span class="card-tag">Step 1</span></h3>
 
-        <div class="form-group">
-          <label class="form-label">Select Template to View</label>
-          <select class="form-select" id="templateSelect" onchange="showTemplate()">
-            <option value="emq">EMQ Template</option>
-            <option value="mcq">MCQ Template</option>
-            <option value="essay">Essay Template</option>
-            <option value="case">Clinical Case Template</option>
-            <option value="morphology">Morphology Case Template</option>
-            <option value="hplc">HPLC Interpretation Template</option>
-          </select>
+          <!-- File Upload Zone -->
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">📄</div>
+            <div class="upload-text">Drop files here or click to upload</div>
+            <div class="upload-hint">PDF, Word, Excel, Images (JPG, PNG), Text files</div>
+            <input type="file" class="file-input" id="fileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.txt,.md">
+          </div>
+          <div class="file-list" id="fileList"></div>
+
+          <!-- URL Input -->
+          <div class="form-group" style="margin-top: 16px;">
+            <label class="form-label">🔗 Add URL (Website or YouTube)</label>
+            <div class="url-input-group">
+              <input type="url" class="form-input" id="urlInput" placeholder="https://example.com or YouTube URL">
+              <button class="btn btn-small btn-secondary" onclick="addUrl()">Add</button>
+            </div>
+            <div class="url-list" id="urlList"></div>
+          </div>
+
+          <!-- Direct Text Input -->
+          <div class="form-group">
+            <label class="form-label">📝 Or paste text directly</label>
+            <textarea class="form-textarea" id="directText" placeholder="Paste article text, guidelines, or any content here..." style="min-height: 120px;"></textarea>
+          </div>
+
+          <!-- Source Preview -->
+          <div class="source-preview" id="sourcePreview" style="display: none;">
+            <div class="source-preview-header">📝 Extracted Content Preview</div>
+            <div id="sourcePreviewContent"></div>
+          </div>
         </div>
 
-        <div class="source-preview" id="templateDisplay" style="display: block; max-height: 500px;">
-          <pre id="templateContent" style="white-space: pre-wrap; margin: 0;"></pre>
-        </div>
+        <!-- Question Settings Card -->
+        <div class="card">
+          <h3>⚙️ Question Settings <span class="card-tag">Step 2</span></h3>
 
-        <button class="btn btn-secondary mt-4" onclick="copyTemplate()">📋 Copy Template</button>
-      </div>
-    </div>
+          <div class="form-group">
+            <label class="form-label">Question Type</label>
+            <select class="form-select" id="questionType">
+              <option value="emq">Extended Matching Question (EMQ)</option>
+              <option value="mcq">Multiple Choice Question (MCQ)</option>
+              <option value="essay">Essay Question</option>
+              <option value="saq">Short Answer Question (SAQ)</option>
+              <option value="case">Clinical Case Study</option>
+              <option value="morphology">Morphology Case</option>
+              <option value="hplc">HPLC Interpretation</option>
+              <option value="viva">Viva Question</option>
+            </select>
+          </div>
 
-    <!-- History Tab -->
-    <div class="tab-panel" id="panel-history">
-      <div class="card">
-        <h3>📜 Generation History <span class="card-tag">Recent</span></h3>
-        <div class="history-list" id="historyList">
-          <div class="output-placeholder" style="min-height: 200px;">
-            <div>No generation history yet</div>
-            <div style="font-size: 0.85rem; margin-top: 8px;">Your generated questions will be saved here</div>
+          <div class="form-group">
+            <label class="form-label">Difficulty Level</label>
+            <select class="form-select" id="difficulty">
+              <option value="foundation">Foundation (ST3-4)</option>
+              <option value="intermediate">Intermediate (ST5-6)</option>
+              <option value="advanced">Advanced (ST7 / Consultant)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Number of Questions</label>
+            <div class="count-selector">
+              <button class="count-btn" onclick="adjustCount(-1)">−</button>
+              <span class="count-display" id="questionCount">3</span>
+              <button class="count-btn" onclick="adjustCount(1)">+</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Clinical Domain (Optional)</label>
+            <select class="form-select" id="clinicalDomain">
+              <option value="">Auto-detect from source</option>
+              <option value="anaemia">Anaemia & Iron Metabolism</option>
+              <option value="haemoglobinopathy">Haemoglobinopathies</option>
+              <option value="coagulation">Coagulation & Haemostasis</option>
+              <option value="thrombosis">Thrombosis & Thrombophilia</option>
+              <option value="transfusion">Transfusion Medicine</option>
+              <option value="malignant">Malignant Haematology</option>
+              <option value="morphology">Blood Film Morphology</option>
+              <option value="bonemarrow">Bone Marrow Assessment</option>
+              <option value="platelet">Platelet Disorders</option>
+              <option value="redcell">Red Cell Disorders</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Additional Instructions (Optional)</label>
+            <textarea class="form-textarea" id="additionalInstructions" placeholder="Focus on specific topics, include certain scenarios, etc." style="min-height: 80px;"></textarea>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="generatePrompt()">
+              🚀 Generate Prompt for Claude
+            </button>
+            <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Settings Tab -->
-    <div class="tab-panel" id="panel-settings">
-      <div class="card">
-        <h3>⚙️ Settings <span class="card-tag">Configure</span></h3>
-
-        <div class="form-group">
-          <label class="form-label">Claude Model</label>
-          <select class="form-select" id="modelSelect">
-            <option value="claude-sonnet-4-20250514">Claude Sonnet 4 (Recommended)</option>
-            <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option>
-            <option value="claude-3-opus-20240229">Claude 3 Opus (Most Capable)</option>
-            <option value="claude-3-haiku-20240307">Claude 3 Haiku (Fastest)</option>
-          </select>
+      <!-- Right Column - Output -->
+      <div>
+        <div class="output-container">
+          <div class="output-header">
+            <h3>📋 Generated Prompt <span class="card-tag">Step 3</span></h3>
+            <div class="output-actions">
+              <button class="btn btn-small btn-teal" id="copyBtn" onclick="copyPrompt()">📋 Copy Prompt</button>
+            </div>
+          </div>
+          <div class="output-body" id="outputBody">
+            <div class="output-placeholder">
+              <div class="output-placeholder-icon">💬</div>
+              <div>Your prompt will appear here</div>
+              <div style="font-size: 0.85rem; margin-top: 8px;">Configure settings and click "Generate Prompt"</div>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Default Question Count</label>
-          <input type="number" class="form-input" id="defaultCount" value="3" min="1" max="10">
+        <div class="callout info" style="margin-top: 20px;">
+          <strong>💡 Tip</strong>
+          <p>After copying the prompt, paste it directly into Claude Code. Claude will read your source material and generate complete, exam-ready questions with detailed answers and explanations!</p>
         </div>
-
-        <div class="form-group">
-          <label class="form-label">Include Answer Explanations</label>
-          <select class="form-select" id="includeExplanations">
-            <option value="full">Full explanations with guidelines</option>
-            <option value="brief">Brief explanations</option>
-            <option value="none">Questions only (no answers)</option>
-          </select>
-        </div>
-
-        <div class="callout">
-          <strong>About the API</strong>
-          <p>This app uses the Claude API to generate questions. Your API key is stored locally in your browser and is never sent to any server except Anthropic's API.</p>
-        </div>
-
-        <button class="btn btn-secondary" onclick="clearHistory()">🗑️ Clear History</button>
-        <button class="btn btn-secondary" onclick="exportSettings()">📤 Export Settings</button>
       </div>
     </div>
   </main>
@@ -1012,7 +799,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div>Blood🩸Doctor | Dr Abdul Mannan FRCPath FCPS | #BloodDoctor</div>
-    <div>Framework v1.0 | Powered by Claude AI</div>
+    <div>Framework v1.0 | For use with Claude Code</div>
   </footer>
 
   <!-- Toast -->
@@ -1026,270 +813,7 @@
     let uploadedFiles = [];
     let addedUrls = [];
     let extractedContent = '';
-    let generationHistory = JSON.parse(localStorage.getItem('examGenHistory') || '[]');
-    let currentOutput = '';
-
-    // Templates
-    const templates = {
-      emq: `THEME: [Clinical/Laboratory Topic]
-
-CLINICAL SCENARIO:
-[2-3 sentence patient presentation with key clinical findings, relevant history, and initial investigations]
-
-LEAD-IN QUESTION:
-[Specific question about diagnosis, investigation, management, or mechanism]
-
-OPTIONS:
-A. [Option]
-B. [Option]
-C. [Option]
-D. [Option]
-E. [Option]
-F. [Option]
-G. [Option]
-H. [Option]
-
-QUESTIONS:
-1. [First clinical question - diagnosis/investigation]
-2. [Second question - pathophysiology/mechanism]
-3. [Third question - management]
-4. [Fourth question - monitoring/complications]
-5. [Fifth question - prognosis/follow-up]
-
----
-
-ANSWERS AND EXPLANATIONS:
-
-Question 1: [Answer Letter]
-RATIONALE (100-150 words):
-- Why this answer is correct
-- Relevant guideline reference (BSH/ISTH/NICE)
-- Clinical reasoning
-
-WHY OTHER OPTIONS ARE WRONG:
-- Option X: [Common misconception]
-- Option Y: [When this would be appropriate instead]
-
-CLINICAL PEARL:
-[Practical point for real-world practice]`,
-
-      mcq: `QUESTION: [Question ID]
-DIFFICULTY: [Foundation/Intermediate/Advanced]
-DOMAIN: [Clinical Domain]
-
-STEM:
-[Clinical scenario 2-4 sentences with patient details, presentation, and key findings]
-
-What is the most appropriate [next step/diagnosis/investigation/management]?
-
-A. [Option - plausible but incorrect]
-B. [Option - partially correct]
-C. [CORRECT ANSWER]
-D. [Option - common misconception]
-E. [Option - outdated practice]
-
----
-
-ANSWER: C
-
-EXPLANATION (150 words):
-[Why C is correct, guideline support, clinical reasoning]
-
-DISTRACTOR ANALYSIS:
-A: [Why wrong, what misconception it tests]
-B: [Why incomplete, when it might be appropriate]
-D: [Common error, why candidates choose this]
-E: [Why outdated, current practice]
-
-KEY LEARNING POINTS:
-- [Point 1]
-- [Point 2]
-- [Point 3]
-
-GUIDELINE REFERENCE:
-[BSH/ISTH/NICE guideline with year]`,
-
-      essay: `ESSAY QUESTION (20 marks)
-TYPE: [Diagnostic Approach / Management Plan / Case Integration / Critical Analysis]
-DOMAIN: [Clinical Domain]
-EXAM LEVEL: Part 1 / Part 2
-
-QUESTION:
-[Full essay question as it would appear in exam]
-
----
-
-MODEL ANSWER:
-
-INTRODUCTION (2 marks | 80-120 words)
-[Clear problem statement, approach overview, key principles]
-
-SECTION 1: [Topic] (5-6 marks | 200-250 words)
-[First major area with specific findings, guideline support, practical application]
-
-SECTION 2: [Topic] (5-6 marks | 200-250 words)
-[Second major area with alternatives, evidence base, reasoning]
-
-SECTION 3: [Topic] (4-5 marks | 150-200 words)
-[Monitoring, follow-up, special considerations]
-
-CONCLUSION (2-3 marks | 100-120 words)
-[Synthesis, key decision points, evidence summary]
-
-MARKING GUIDANCE:
-- Excellent (18-20): Comprehensive, well-structured, current guidelines
-- Good (14-17): Most key points, minor omissions
-- Satisfactory (10-13): Basic structure, some gaps
-- Poor (<10): Major omissions, factual errors`,
-
-      case: `CLINICAL CASE STUDY
-COMPLEXITY: [Foundation/Intermediate/Advanced]
-DURATION: [15/20/30 minutes]
-
-PATIENT PRESENTATION:
-[Detailed patient demographics, presenting complaint, history]
-
-CLINICAL FINDINGS:
-[Examination findings, vital signs]
-
-INVESTIGATIONS:
-[Tabulated results with normal ranges]
-
-QUESTION 1 (5 marks):
-[Interpretation of findings]
-
-QUESTION 2 (5 marks):
-[Differential diagnosis]
-
-QUESTION 3 (5 marks):
-[Further investigations]
-
-QUESTION 4 (5 marks):
-[Management plan]
-
----
-
-MODEL ANSWERS:
-
-Q1 ANSWER:
-[Detailed interpretation]
-
-Q2 ANSWER:
-[Ranked differential with reasoning]
-
-Q3 ANSWER:
-[Specific tests with rationale]
-
-Q4 ANSWER:
-[Acute and long-term management]`,
-
-      morphology: `MORPHOLOGY CASE
-MATERIAL: [Blood Film / BM Aspirate / Trephine Biopsy]
-TIME ALLOWED: [9 minutes short case / 30 minutes long case]
-
-CLINICAL CONTEXT:
-[Brief patient details and indication for examination]
-
-IMAGE DESCRIPTION:
-[Detailed description of what would be seen]
-
-SYSTEMATIC ASSESSMENT:
-
-RED CELLS:
-- Size: [normocytic/microcytic/macrocytic]
-- Shape: [morphological abnormalities]
-- Colour: [hypochromic/normochromic/polychromatic]
-- Inclusions: [if any]
-
-WHITE CELLS:
-- Count estimate: [low/normal/high]
-- Differential: [types seen]
-- Morphology: [abnormalities]
-
-PLATELETS:
-- Count estimate: [low/normal/high]
-- Morphology: [size, granulation]
-
-BACKGROUND:
-[Any notable features]
-
----
-
-SIGNIFICANT FINDINGS:
-1. [Finding] - Significance: [interpretation]
-2. [Finding] - Significance: [interpretation]
-3. [Finding] - Significance: [interpretation]
-
-DIFFERENTIAL DIAGNOSIS:
-1. [Most likely] - Supporting features
-2. [Alternative] - Why considered
-3. [Alternative] - Why less likely
-
-CONFIRMATORY INVESTIGATIONS:
-1. [Test] - Expected result
-2. [Test] - Expected result
-
-CLINICAL PEARL:
-[Practical diagnostic tip]`,
-
-      hplc: `HPLC INTERPRETATION CASE
-
-PATIENT DETAILS:
-Age: [X] years
-Ethnicity: [relevant background]
-Clinical indication: [reason for testing]
-
-HPLC/CE RESULTS:
-| Peak | Retention Time | Percentage | Normal Range |
-|------|----------------|------------|--------------|
-| HbA  | [time]         | [%]        | 96.5-98.5%   |
-| HbA2 | [time]         | [%]        | 2.0-3.5%     |
-| HbF  | [time]         | [%]        | <1.0%        |
-| [Other peaks if present]                           |
-
-ADDITIONAL DATA:
-MCV: [value] fL (80-100)
-MCH: [value] pg (27-32)
-RBC: [value] x10^12/L
-
----
-
-INTERPRETATION:
-
-ABNORMAL FINDINGS:
-1. [Peak abnormality] - Significance
-2. [Index abnormality] - Significance
-
-PATTERN RECOGNITION:
-[What this combination suggests]
-
-DIFFERENTIAL DIAGNOSIS:
-1. [Most likely diagnosis]
-2. [Alternative]
-3. [Alternative]
-
-CONFIRMATORY TESTS:
-1. [Test] - To confirm [what]
-2. [Test] - To exclude [what]
-
-CLINICAL IMPLICATIONS:
-- For patient: [management needs]
-- Genetic counselling: [inheritance, carrier risk]
-- Family screening: [who to test]
-
-PITFALL TO AVOID:
-[Common misinterpretation]`
-    };
-
-    // Tab Navigation
-    document.querySelectorAll('.nav-pill').forEach(pill => {
-      pill.addEventListener('click', () => {
-        document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        document.getElementById('panel-' + pill.dataset.tab).classList.add('active');
-      });
-    });
+    let generatedPrompt = '';
 
     // File Upload
     const uploadZone = document.getElementById('uploadZone');
@@ -1316,6 +840,7 @@ PITFALL TO AVOID:
         }
       }
       updateFileList();
+      updateSteps();
     }
 
     async function extractFileContent(file) {
@@ -1331,12 +856,8 @@ PITFALL TO AVOID:
         } else if (type.includes('sheet') || name.endsWith('.xlsx') || name.endsWith('.xls')) {
           content = await extractExcelContent(file);
         } else if (type.startsWith('image/')) {
-          content = `[IMAGE: ${file.name}]\n[Image will be analyzed by Claude Vision]`;
-          // Store the image data for API call
-          file.imageData = await fileToBase64(file);
-        } else if (type.startsWith('video/')) {
-          content = `[VIDEO: ${file.name}]\n[Note: Video analysis requires frame extraction - first frame will be analyzed]`;
-        } else if (type === 'text/plain') {
+          content = `[IMAGE FILE: ${file.name}]\n[Please describe this image or include relevant text from it in the prompt]`;
+        } else if (type === 'text/plain' || name.endsWith('.txt') || name.endsWith('.md')) {
           content = await file.text();
         }
 
@@ -1355,7 +876,7 @@ PITFALL TO AVOID:
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
       let text = '';
 
-      for (let i = 1; i <= pdf.numPages; i++) {
+      for (let i = 1; i <= Math.min(pdf.numPages, 50); i++) { // Limit to 50 pages
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
         const pageText = content.items.map(item => item.str).join(' ');
@@ -1385,20 +906,11 @@ PITFALL TO AVOID:
       return text;
     }
 
-    async function fileToBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
     function updateFileList() {
       const list = document.getElementById('fileList');
       list.innerHTML = uploadedFiles.map((file, index) => `
         <div class="file-chip">
-          <span>${getFileIcon(file.type)}</span>
+          <span>${getFileIcon(file.type, file.name)}</span>
           <span>${file.name}</span>
           <span class="file-chip-remove" onclick="removeFile(${index})">×</span>
         </div>
@@ -1407,12 +919,11 @@ PITFALL TO AVOID:
       uploadZone.classList.toggle('has-files', uploadedFiles.length > 0);
     }
 
-    function getFileIcon(type) {
-      if (type.includes('pdf')) return '📄';
-      if (type.includes('word')) return '📝';
-      if (type.includes('sheet') || type.includes('excel')) return '📊';
+    function getFileIcon(type, name) {
+      if (type.includes('pdf') || name.endsWith('.pdf')) return '📄';
+      if (type.includes('word') || name.endsWith('.docx') || name.endsWith('.doc')) return '📝';
+      if (type.includes('sheet') || type.includes('excel') || name.endsWith('.xlsx') || name.endsWith('.xls')) return '📊';
       if (type.startsWith('image/')) return '🖼️';
-      if (type.startsWith('video/')) return '🎬';
       return '📁';
     }
 
@@ -1420,13 +931,14 @@ PITFALL TO AVOID:
       uploadedFiles.splice(index, 1);
       updateFileList();
       rebuildExtractedContent();
+      updateSteps();
     }
 
-    function rebuildExtractedContent() {
+    async function rebuildExtractedContent() {
       extractedContent = '';
-      uploadedFiles.forEach(async file => {
+      for (const file of uploadedFiles) {
         await extractFileContent(file);
-      });
+      }
     }
 
     // URL Management
@@ -1443,7 +955,14 @@ PITFALL TO AVOID:
       if (!addedUrls.includes(url)) {
         addedUrls.push(url);
         updateUrlList();
-        fetchUrlContent(url);
+
+        if (url.includes('youtube') || url.includes('youtu.be')) {
+          extractedContent += `\n\n=== SOURCE: YouTube Video ===\nURL: ${url}\n[Please watch this video and extract the relevant content for question generation]`;
+        } else {
+          extractedContent += `\n\n=== SOURCE: Website ===\nURL: ${url}\n[Please visit this URL and extract the relevant content for question generation]`;
+        }
+        updateSourcePreview();
+        updateSteps();
       }
 
       input.value = '';
@@ -1463,29 +982,29 @@ PITFALL TO AVOID:
     function removeUrl(index) {
       addedUrls.splice(index, 1);
       updateUrlList();
-    }
-
-    async function fetchUrlContent(url) {
-      // For YouTube, we'll note it for the API to handle
-      if (url.includes('youtube') || url.includes('youtu.be')) {
-        extractedContent += `\n\n=== SOURCE: YouTube Video ===\nURL: ${url}\n[YouTube transcript/content will be analyzed]`;
-      } else {
-        extractedContent += `\n\n=== SOURCE: Website ===\nURL: ${url}\n[Website content will be fetched and analyzed]`;
-      }
-      updateSourcePreview();
+      updateSteps();
     }
 
     function updateSourcePreview() {
       const preview = document.getElementById('sourcePreview');
       const content = document.getElementById('sourcePreviewContent');
+      const directText = document.getElementById('directText').value;
 
-      if (extractedContent.trim()) {
+      const fullContent = extractedContent + (directText ? `\n\n=== DIRECT INPUT ===\n${directText}` : '');
+
+      if (fullContent.trim()) {
         preview.style.display = 'block';
-        content.textContent = extractedContent.substring(0, 2000) + (extractedContent.length > 2000 ? '...' : '');
+        content.textContent = fullContent.substring(0, 1500) + (fullContent.length > 1500 ? '\n... [content truncated in preview]' : '');
       } else {
         preview.style.display = 'none';
       }
     }
+
+    // Update preview when direct text changes
+    document.getElementById('directText').addEventListener('input', () => {
+      updateSourcePreview();
+      updateSteps();
+    });
 
     // Question Count
     let questionCount = 3;
@@ -1495,52 +1014,22 @@ PITFALL TO AVOID:
       document.getElementById('questionCount').textContent = questionCount;
     }
 
-    // API Key Management
-    function saveApiKey() {
-      const key = document.getElementById('apiKey').value.trim();
-      if (key) {
-        localStorage.setItem('claudeApiKey', key);
-        updateApiStatus(true);
-        showToast('API key saved!', 'success');
-      }
+    // Update step indicators
+    function updateSteps() {
+      const hasSource = extractedContent.trim() || document.getElementById('directText').value.trim() || addedUrls.length > 0;
+
+      document.getElementById('step1').classList.toggle('completed', hasSource);
+      document.getElementById('step1').classList.toggle('active', !hasSource);
+      document.getElementById('step2').classList.toggle('active', hasSource);
     }
 
-    function toggleApiKey() {
-      const input = document.getElementById('apiKey');
-      const btn = event.target;
-      if (input.type === 'password') {
-        input.type = 'text';
-        btn.textContent = 'Hide';
-      } else {
-        input.type = 'password';
-        btn.textContent = 'Show';
-      }
-    }
+    // Generate Prompt
+    function generatePrompt() {
+      const directText = document.getElementById('directText').value.trim();
+      const fullContent = extractedContent + (directText ? `\n\n=== DIRECT INPUT ===\n${directText}` : '');
 
-    function updateApiStatus(connected) {
-      const status = document.getElementById('apiStatus');
-      status.className = 'api-status ' + (connected ? 'connected' : 'disconnected');
-      status.innerHTML = `<span class="status-dot"></span><span>${connected ? 'API key saved' : 'Not connected'}</span>`;
-    }
-
-    // Load saved API key
-    const savedKey = localStorage.getItem('claudeApiKey');
-    if (savedKey) {
-      document.getElementById('apiKey').value = savedKey;
-      updateApiStatus(true);
-    }
-
-    // Generate Questions
-    async function generateQuestions() {
-      const apiKey = localStorage.getItem('claudeApiKey');
-
-      if (!apiKey) {
-        showToast('Please enter your Claude API key first', 'error');
-        return;
-      }
-
-      if (!extractedContent.trim() && uploadedFiles.length === 0 && addedUrls.length === 0) {
-        showToast('Please upload a source or add a URL first', 'error');
+      if (!fullContent.trim() && addedUrls.length === 0) {
+        showToast('Please add source material first', 'error');
         return;
       }
 
@@ -1548,314 +1037,210 @@ PITFALL TO AVOID:
       const difficulty = document.getElementById('difficulty').value;
       const domain = document.getElementById('clinicalDomain').value;
       const instructions = document.getElementById('additionalInstructions').value;
-      const model = document.getElementById('modelSelect')?.value || 'claude-sonnet-4-20250514';
-      const explanations = document.getElementById('includeExplanations')?.value || 'full';
 
-      // Show loading
-      const outputBody = document.getElementById('outputBody');
-      outputBody.innerHTML = `
-        <div class="loading">
-          <div class="spinner"></div>
-          <div class="loading-text">Generating ${questionCount} ${questionType.toUpperCase()} question(s)...</div>
-        </div>
+      const typeNames = {
+        emq: 'Extended Matching Questions (EMQs)',
+        mcq: 'Multiple Choice Questions (MCQs)',
+        essay: 'Essay Questions',
+        saq: 'Short Answer Questions (SAQs)',
+        case: 'Clinical Case Studies',
+        morphology: 'Morphology Cases',
+        hplc: 'HPLC Interpretation Cases',
+        viva: 'Viva Questions'
+      };
+
+      const difficultyDesc = {
+        foundation: 'Foundation level (ST3-4 trainee) - testing core knowledge and common presentations',
+        intermediate: 'Intermediate level (ST5-6 trainee) - testing clinical application and reasoning',
+        advanced: 'Advanced level (ST7/Consultant) - testing complex scenarios and expert judgement'
+      };
+
+      // Build the prompt
+      generatedPrompt = `# FRCPath Haematology Exam Question Generation Request
+
+## Task
+Generate **${questionCount} complete ${typeNames[questionType]}** for FRCPath haematology examination preparation.
+
+## Difficulty Level
+${difficultyDesc[difficulty]}
+
+${domain ? `## Clinical Domain Focus\n${domain}\n` : ''}
+
+## Source Material
+Please use the following content as the basis for generating exam questions:
+
+${fullContent}
+
+${addedUrls.length > 0 ? `\n## URLs to Reference\n${addedUrls.map(u => `- ${u}`).join('\n')}\n\nPlease access and use content from these URLs.\n` : ''}
+
+${instructions ? `## Additional Instructions\n${instructions}\n` : ''}
+
+## Output Requirements
+
+Please generate **${questionCount}** complete, exam-ready questions with the following structure:
+
+${getTemplateForType(questionType)}
+
+## Quality Standards
+1. All content must align with current BSH, ISTH, NICE, and UK guidelines
+2. Use UK medical terminology and spelling
+3. Include specific guideline references where relevant
+4. Ensure clinical accuracy and relevance to UK practice
+5. Test clinical reasoning, not just factual recall
+
+## Format
+- Use clear markdown formatting
+- Include headers for each question
+- Provide complete answers with detailed explanations
+- Add clinical pearls and learning points
+
+---
+
+#BloodDoctor
+
+Please generate the questions now.`;
+
+      // Display the prompt
+      document.getElementById('outputBody').innerHTML = `
+        <div class="prompt-output">${escapeHtml(generatedPrompt)}</div>
       `;
 
-      document.getElementById('generateBtn').disabled = true;
+      // Update steps
+      document.getElementById('step2').classList.add('completed');
+      document.getElementById('step2').classList.remove('active');
+      document.getElementById('step3').classList.add('active');
 
-      try {
-        // Build the prompt
-        const systemPrompt = buildSystemPrompt(questionType, difficulty, domain, explanations);
-        const userPrompt = buildUserPrompt(questionType, questionCount, instructions);
-
-        // Prepare messages
-        const messages = [{
-          role: 'user',
-          content: []
-        }];
-
-        // Add images if any
-        for (const file of uploadedFiles) {
-          if (file.imageData) {
-            messages[0].content.push({
-              type: 'image',
-              source: {
-                type: 'base64',
-                media_type: file.type,
-                data: file.imageData
-              }
-            });
-          }
-        }
-
-        // Add text content
-        messages[0].content.push({
-          type: 'text',
-          text: userPrompt
-        });
-
-        // Call Claude API
-        const response = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': apiKey,
-            'anthropic-version': '2023-06-01',
-            'anthropic-dangerous-direct-browser-access': 'true'
-          },
-          body: JSON.stringify({
-            model: model,
-            max_tokens: 8192,
-            system: systemPrompt,
-            messages: messages
-          })
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error?.message || 'API request failed');
-        }
-
-        const data = await response.json();
-        currentOutput = data.content[0].text;
-
-        // Display the result
-        outputBody.innerHTML = `<div class="generated-question">${marked.parse(currentOutput)}</div>`;
-
-        // Save to history
-        saveToHistory(questionType, difficulty, currentOutput);
-
-        showToast('Questions generated successfully!', 'success');
-
-      } catch (error) {
-        console.error('Generation error:', error);
-        outputBody.innerHTML = `
-          <div class="output-placeholder">
-            <div class="output-placeholder-icon">❌</div>
-            <div style="color: var(--blood);">Error: ${error.message}</div>
-            <div style="font-size: 0.85rem; margin-top: 8px;">Please check your API key and try again</div>
-          </div>
-        `;
-        showToast('Error generating questions', 'error');
-      }
-
-      document.getElementById('generateBtn').disabled = false;
+      showToast('Prompt generated! Click "Copy Prompt" to copy it.', 'success');
     }
 
-    function buildSystemPrompt(questionType, difficulty, domain, explanations) {
-      const typeDescriptions = {
-        emq: 'Extended Matching Questions with themes, options, and multiple linked questions',
-        mcq: 'Single Best Answer Multiple Choice Questions with 5 options',
-        essay: 'Structured Essay Questions with model answers and marking guidance',
-        saq: 'Short Answer Questions requiring concise focused responses',
-        case: 'Clinical Case Studies with progressive questions',
-        morphology: 'Morphology Cases describing blood film or bone marrow findings',
-        hplc: 'HPLC/Haemoglobin Electrophoresis interpretation cases',
-        viva: 'Viva-style oral examination questions and expected answers'
+    function getTemplateForType(type) {
+      const templates = {
+        emq: `### EMQ Structure Required:
+- Theme with clinical scenario (2-3 sentences)
+- 8-10 options (A-J)
+- 5 linked questions
+- For each question: Correct answer, detailed rationale (100-150 words), why other options are wrong, clinical pearl`,
+
+        mcq: `### MCQ Structure Required:
+- Clinical stem (2-4 sentences)
+- 5 options (A-E) with one correct answer
+- Correct answer with full explanation (120-150 words)
+- Analysis of each distractor
+- Key learning points
+- Guideline references`,
+
+        essay: `### Essay Structure Required (20 marks):
+- Clear essay question
+- Model answer with:
+  - Introduction (2 marks, 80-120 words)
+  - Section 1 (5-6 marks, 200-250 words)
+  - Section 2 (5-6 marks, 200-250 words)
+  - Section 3 (4-5 marks, 150-200 words)
+  - Conclusion (2-3 marks, 100-120 words)
+- Marking guidance`,
+
+        saq: `### SAQ Structure Required:
+- Clinical scenario
+- 4-5 short answer questions (2-4 marks each)
+- Model answers with key points
+- Marking scheme`,
+
+        case: `### Clinical Case Structure Required:
+- Detailed patient presentation
+- Investigation results (tabulated)
+- Progressive questions (interpretation, differential, investigations, management)
+- Complete model answers`,
+
+        morphology: `### Morphology Case Structure Required:
+- Clinical context
+- Systematic description (RBCs, WBCs, platelets)
+- Significant findings with interpretation
+- Differential diagnosis (ranked)
+- Confirmatory investigations
+- Clinical pearl`,
+
+        hplc: `### HPLC Case Structure Required:
+- Patient demographics and indication
+- HPLC results table with percentages
+- Red cell indices
+- Interpretation and pattern recognition
+- Differential diagnosis
+- Confirmatory tests
+- Clinical implications and counselling points`,
+
+        viva: `### Viva Question Structure Required:
+- Opening question with expected answer
+- Follow-up questions (progressive difficulty)
+- Key points examiners look for
+- Common mistakes to avoid
+- Model answers at different competency levels`
       };
 
-      const difficultyGuide = {
-        foundation: 'ST3-4 trainee level - test core knowledge and common presentations',
-        intermediate: 'ST5-6 trainee level - test application and clinical reasoning',
-        advanced: 'ST7/Consultant level - test complex scenarios and expert judgement'
-      };
-
-      return `You are an expert FRCPath Haematology examiner creating high-quality exam questions for UK haematology trainees.
-
-QUESTION TYPE: ${typeDescriptions[questionType]}
-DIFFICULTY: ${difficultyGuide[difficulty]}
-${domain ? `CLINICAL DOMAIN: ${domain}` : ''}
-
-CORE REQUIREMENTS:
-1. All content must be evidence-based and aligned with current BSH, ISTH, NICE, and UK guidelines
-2. Questions must reflect real-world UK haematology practice
-3. Use correct medical terminology and UK spelling
-4. Include specific guideline references where relevant
-5. Test clinical reasoning, not just recall
-
-${explanations === 'full' ? `
-ANSWER REQUIREMENTS:
-- Provide detailed explanations for correct answers (100-150 words)
-- Explain why each incorrect option is wrong
-- Include relevant guideline references
-- Add clinical pearls and learning points
-` : explanations === 'brief' ? `
-ANSWER REQUIREMENTS:
-- Provide brief explanations (50-75 words)
-- State correct answer with key reasoning
-` : `
-OUTPUT: Questions only, no answers or explanations
-`}
-
-FORMAT: Use clear markdown formatting with headers, bullet points, and tables where appropriate.
-Always include #BloodDoctor at the end.`;
+      return templates[type] || templates.mcq;
     }
 
-    function buildUserPrompt(questionType, count, instructions) {
-      let prompt = `Based on the following source material, generate ${count} ${questionType.toUpperCase()} question(s).
-
-=== SOURCE MATERIAL ===
-${extractedContent}
-
-=== URLS TO REFERENCE ===
-${addedUrls.join('\n')}
-
-=== INSTRUCTIONS ===
-${instructions || 'Generate comprehensive exam questions covering the key topics in the source material.'}
-
-Please generate exactly ${count} complete, exam-ready question(s) following the appropriate template structure.`;
-
-      return prompt;
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
 
-    function saveToHistory(type, difficulty, content) {
-      const item = {
-        id: Date.now(),
-        type: type,
-        difficulty: difficulty,
-        timestamp: new Date().toISOString(),
-        preview: content.substring(0, 100) + '...',
-        content: content
-      };
-
-      generationHistory.unshift(item);
-      if (generationHistory.length > 50) generationHistory.pop();
-
-      localStorage.setItem('examGenHistory', JSON.stringify(generationHistory));
-      updateHistoryList();
-    }
-
-    function updateHistoryList() {
-      const list = document.getElementById('historyList');
-
-      if (generationHistory.length === 0) {
-        list.innerHTML = `
-          <div class="output-placeholder" style="min-height: 200px;">
-            <div>No generation history yet</div>
-          </div>
-        `;
+    function copyPrompt() {
+      if (!generatedPrompt) {
+        showToast('Generate a prompt first', 'error');
         return;
       }
 
-      list.innerHTML = generationHistory.map(item => `
-        <div class="history-item" onclick="loadFromHistory(${item.id})">
-          <div class="history-item-info">
-            <div class="history-item-title">${item.type.toUpperCase()} - ${item.difficulty}</div>
-            <div class="history-item-meta">${new Date(item.timestamp).toLocaleString()}</div>
-          </div>
-          <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); deleteFromHistory(${item.id})">🗑️</button>
-        </div>
-      `).join('');
-    }
+      navigator.clipboard.writeText(generatedPrompt).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('copy-success');
+        showToast('Prompt copied! Paste it into Claude Code.', 'success');
 
-    function loadFromHistory(id) {
-      const item = generationHistory.find(h => h.id === id);
-      if (item) {
-        currentOutput = item.content;
-        document.getElementById('outputBody').innerHTML = `<div class="generated-question">${marked.parse(item.content)}</div>`;
-        document.querySelector('.nav-pill[data-tab="generator"]').click();
-        showToast('Loaded from history', 'success');
-      }
-    }
-
-    function deleteFromHistory(id) {
-      generationHistory = generationHistory.filter(h => h.id !== id);
-      localStorage.setItem('examGenHistory', JSON.stringify(generationHistory));
-      updateHistoryList();
-      showToast('Deleted from history', 'success');
-    }
-
-    function clearHistory() {
-      if (confirm('Clear all generation history?')) {
-        generationHistory = [];
-        localStorage.setItem('examGenHistory', '[]');
-        updateHistoryList();
-        showToast('History cleared', 'success');
-      }
-    }
-
-    // Output Actions
-    function copyOutput() {
-      if (currentOutput) {
-        navigator.clipboard.writeText(currentOutput);
-        showToast('Copied to clipboard!', 'success');
-      }
-    }
-
-    function downloadOutput() {
-      if (currentOutput) {
-        const blob = new Blob([currentOutput], { type: 'text/markdown' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `frcpath-questions-${Date.now()}.md`;
-        a.click();
-        URL.revokeObjectURL(url);
-        showToast('Downloaded!', 'success');
-      }
-    }
-
-    function regenerate() {
-      generateQuestions();
+        setTimeout(() => {
+          btn.textContent = '📋 Copy Prompt';
+          btn.classList.remove('copy-success');
+        }, 2000);
+      });
     }
 
     function clearAll() {
       uploadedFiles = [];
       addedUrls = [];
       extractedContent = '';
+      generatedPrompt = '';
+
       updateFileList();
       updateUrlList();
-      updateSourcePreview();
+      document.getElementById('directText').value = '';
       document.getElementById('additionalInstructions').value = '';
+      document.getElementById('sourcePreview').style.display = 'none';
       document.getElementById('outputBody').innerHTML = `
         <div class="output-placeholder">
-          <div class="output-placeholder-icon">📝</div>
-          <div>Your generated questions will appear here</div>
+          <div class="output-placeholder-icon">💬</div>
+          <div>Your prompt will appear here</div>
+          <div style="font-size: 0.85rem; margin-top: 8px;">Configure settings and click "Generate Prompt"</div>
         </div>
       `;
-      currentOutput = '';
+
+      // Reset steps
+      document.getElementById('step1').classList.add('active');
+      document.getElementById('step1').classList.remove('completed');
+      document.getElementById('step2').classList.remove('active', 'completed');
+      document.getElementById('step3').classList.remove('active');
+
+      showToast('Cleared all inputs', 'success');
     }
 
-    // Templates
-    function showTemplate() {
-      const type = document.getElementById('templateSelect').value;
-      document.getElementById('templateContent').textContent = templates[type];
-    }
-
-    function copyTemplate() {
-      const type = document.getElementById('templateSelect').value;
-      navigator.clipboard.writeText(templates[type]);
-      showToast('Template copied!', 'success');
-    }
-
-    // Settings
-    function exportSettings() {
-      const settings = {
-        model: document.getElementById('modelSelect')?.value,
-        defaultCount: document.getElementById('defaultCount')?.value,
-        explanations: document.getElementById('includeExplanations')?.value,
-        history: generationHistory
-      };
-
-      const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'examgen-settings.json';
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    // Toast
     function showToast(message, type = '') {
       const toast = document.getElementById('toast');
       toast.textContent = message;
       toast.className = 'toast show ' + type;
       setTimeout(() => toast.className = 'toast', 3000);
     }
-
-    // Initialize
-    showTemplate();
-    updateHistoryList();
   </script>
 </body>
 </html>

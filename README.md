@@ -1,6 +1,6 @@
-# Blood🩸Doctor – Chapter 30 Webapp
+# Blood🩸Doctor – Inherited BMF Learning Guide
 
-Static HTML app summarizing **Hoffbrand Postgraduate Haematology, Chapter 30: Inherited Aplastic Anaemia / Bone Marrow Failure Syndromes**.
+Interactive learning app for **Inherited Aplastic Anaemia & Bone Marrow Failure Syndromes**.
 
 ## Publish on GitHub Pages
 1. Create a new GitHub repository and push this folder.
